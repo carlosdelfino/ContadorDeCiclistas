@@ -8,3 +8,8 @@
 bin/*
 tmp/*
 gdb_cmds
+.data
+.camera.conf
+.cproject
+.project
+.settings/
