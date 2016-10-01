@@ -1,0 +1,6 @@
+{
+  "name": "Contador de Ciclistas - Fork ARM (NanoPI e RaspberryPI)",
+  "tagline": "Contador de Ciclistas e Objetos Moveis na Pista",
+  "body": "## Contador de Ciclista\r\n\r\nEste é um fork do projeto original para contagem de ciclistas em ciclovias e ciclofaixas. O objetivo do fork é contribuir principalmente com o projeto original gerando um Port para RaspeberryPI e para NanoPI em principal.\r\n\r\nO projeto original pode ser encontrado na página: www.github.com/LabProdam/ContadorDeCiclistas\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
