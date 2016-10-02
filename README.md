@@ -2,13 +2,19 @@ Contador de Ciclistas
 =====================
 
 Projeto experimental de contagem de ciclistas utilizando webcam de baixo custo.
+Adicionado a este Fork o uso de placa de prototipação NanoPI M3 com processador
+Cortex-A53 dotado de unidade de ponto flutuante do tipo NEON.
+
+Algumas alterações foram realizadas na compilação para que seja gerado um 
+binário 100% para o Cortex-A53.
 
 Requisitos
 -----------
 
+- GCC 4.9 (GNU-Linux-EABI)
 - OpenCv 2.4
 - V4l2Loopback
-- WebCam
+- WebCam (qualquer de R$ 20,00)
 
 Como Usar
 ---------
@@ -51,3 +57,6 @@ Exemplo:
 
 8) O ponto inferior direito da área de corte (vermelha)
 
+9) O ponto superior esquerdo da área de interesse (preta)
+
+10) o ponto inferior direito da área de interesse (preta)

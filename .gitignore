@@ -5,6 +5,12 @@
 *.orig
 *.data
 *.log
+*.gcno
 bin/*
 tmp/*
 gdb_cmds
+.project
+.settings\
+.cproject
+.camera.conf
+.data
