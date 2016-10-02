@@ -38,6 +38,14 @@ CFLAGS=--std=c++11 \
 # -Wdouble-promotion //colocar em maquinas 32bits . autconf?
 #  https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
 
+# Using ARM specific options for optimize compiler
+# NanoPI M3 use a Cortex-A53 with a FPU Coprocessor NEON
+# Porem não sei qual variação do NEON está sendo usada, por hora manterei
+# a versão mais genérica
+CFLAGS_NanoPI_M3=-mtune=cortex-a53 \
+           -mfpu=neon \
+           -mcpu=cortex-a53
+
 LDFLAGS=-lm \
 	   `pkg-config --libs opencv` \
 	   -lpthread
@@ -46,7 +54,7 @@ LDFLAGS=-lm \
 all:$(OBJ)
 	@mkdir -p $(DISTDIR)
 	@mkdir -p tmp
-	g++ $(OBJ) -o $(DISTDIR)/$(BIN) $(LDFLAGS)
+	g++ $(OBJ) -o $(DISTDIR)/$(BIN) $(LDFLAGS) 
 
 clean:
 	rm -f $(DISTDIR)/$(BIN)
@@ -54,4 +62,4 @@ clean:
 
 %.o: %.cpp
 	@echo CCXX $< -o $@ CFLAGS
-	@g++ -c $< -o $@ $(CFLAGS)
+	@g++ -c $< -o $@ $(CFLAGS) $(CFLAGS_NanoPI_M3)
