@@ -56,8 +56,8 @@ clean:
 	@echo CCXX $< -o $@ CFLAGS
 	@g++ -c $< -o $@ $(CFLAGS)
 
-pgo-firstpass: CFLAGS += -march=native -fprofile-generate --coverage
-pgo-firstpass: LDFLAGS += -fprofile-generate --coverage
+pgo-firstpass: CFLAGS += -pg -fprofile-generate --coverage
+pgo-firstpass: LDFLAGS += -pg -fprofile-generate --coverage
 pgo-firstpass:all
 
 pgo-secondpass: CFLAGS += -fprofile-correction -fprofile-use
@@ -67,4 +67,4 @@ pgo-secondpass:all
 .PHONY: pgo pgo-secondpass
 
 distclean: clean
-	rm -f *.gcda *.gcno *.gcov 
+	rm -f *.gcda *.gcno *.gcov gmon.out
