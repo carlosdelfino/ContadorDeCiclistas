@@ -55,3 +55,16 @@ clean:
 %.o: %.cpp
 	@echo CCXX $< -o $@ CFLAGS
 	@g++ -c $< -o $@ $(CFLAGS)
+
+pgo-firstpass: CFLAGS += -march=native -fprofile-generate
+pgo-firstpass: LDFLAGS += -fprofile-generate
+pgo-firstpass:all
+
+pgo-secondpass: CFLAGS += -fprofile-correction -fprofile-use
+pgo-secondpass: LDFLAGS += -fprofile-correction -fprofile-use
+pgo-secondpass:all
+	
+.PHONY: pgo pgo-secondpass
+
+distclean: clean
+	rm -f *.gcda

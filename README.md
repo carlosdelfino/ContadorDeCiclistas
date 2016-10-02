@@ -51,3 +51,16 @@ Exemplo:
 
 8) O ponto inferior direito da área de corte (vermelha)
 
+PGO Build
+---------
+
+`make pgo-firstpass`
+(Use the software for a few hours like you're used to)
+`make clean
+make pgo-secondpass`
+(The new binary is now optimised for that use)
+
+Remove PGO *.gpca files
+-----------------------
+
+`make distclean`
