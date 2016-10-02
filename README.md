@@ -60,7 +60,15 @@ PGO Build
 make pgo-secondpass`
 (The new binary is now optimised for that use)
 
-Remove PGO *.gpca files
------------------------
+Remove PGO files
+----------------
 
 `make distclean`
+
+Analyse the generated PGO files
+-------------------------------
+
+Tools like gcov and gcovr might help you :
+- analyse the generated profiles and
+- determine which parts of the code were used the most in your code.
+
