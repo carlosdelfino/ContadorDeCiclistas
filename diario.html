@@ -36,7 +36,18 @@
 <a id="contador-de-ciclista" class="anchor" href="#contador-de-ciclista" aria-hidden="true">
 <span aria-hidden="true" class="octicon octicon-link"></span></a>Passo a Passo diário para port do projeto para ARM Cortex-53</h2>
 
-<p>Anotações Diárias do processo de Port</p>
+<p>Conforme pode ser visto no repositório, clique no botão acima para ver no 
+github, criei um branch de nome <b>NanoPI-M3</b> onde os teses atuais estão 
+sendo feitos.</p>
+<p>No estágio atual o branch já pode ser unificado com o master, pois existem
+targets especificas para cada compilação, podendo assim gerar código para cada
+plataforma Intel ou ARM Cortex-A53, porém se estiver compilando através de 
+cross-compiler é preciso usar as variáveis para indicar o compilador.<p>
+<p>No próprio NanoPI-M3 não precisa informar qual compilador usar, se estiver
+no linux em uma plataforma intel use:</p>
+<pre>
+make CROSS_COMPILE=arm-linux- CONFIG_CROSS_COMPILE=arm-linux- targetcompilacao
+<pre> 
         </section>
 
         <footer>
