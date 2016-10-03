@@ -48,14 +48,6 @@ CFLAGS_NanoPI_M3=-mtune=cortex-a53 \
            -mfloat-abi=hard \
            -march=armv8-a+crc
 
-# Adicionado para identificar funções que sejam potencialmente optimizaveis
-#CFLAGS_OPTM=-pg \
-#            -fprofile-arcs \
-#            -ftest-coverage \
-#            -fPIC \
-#            -fprofile-generate \
-#            --coverage
-
 LDFLAGS=-lm \
 	   `pkg-config --libs opencv` \
 	   -lpthread
@@ -64,7 +56,7 @@ LDFLAGS=-lm \
 all:$(OBJ)
 	@mkdir -p $(DISTDIR)
 	@mkdir -p tmp
-	g++ $(OBJ) -o $(DISTDIR)/$(BIN) $(LDFLAGS) $(CFLAGS_NanoPI_M3) $(CFLAGS_OPTM)
+	g++ $(OBJ) -o $(DISTDIR)/$(BIN) $(LDFLAGS) $(CFLAGS_NanoPI_M3) 
 
 clean:
 	rm -f $(DISTDIR)/$(BIN)
@@ -72,4 +64,17 @@ clean:
 
 %.o: %.cpp
 	@echo CCXX $< -o $@ CFLAGS
-	@g++ -c $< -o $@ $(CFLAGS) $(CFLAGS_NanoPI_M3) $(CFLAGS_OPTM)
+	@g++ -c $< -o $@ $(CFLAGS) $(CFLAGS_NanoPI_M3) 
+
+pgo-firstpass: CFLAGS += -pg -fprofile-generate --coverage
+pgo-firstpass: LDFLAGS += -pg -fprofile-generate --coverage
+pgo-firstpass:all
+
+pgo-secondpass: CFLAGS += -fprofile-correction -fprofile-use
+pgo-secondpass: LDFLAGS += -fprofile-correction -fprofile-use
+pgo-secondpass:all
+	
+.PHONY: pgo pgo-secondpass
+
+distclean: clean
+	rm -f *.gcda *.gcno *.gcov gmon.out
