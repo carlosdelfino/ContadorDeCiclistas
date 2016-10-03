@@ -3,6 +3,8 @@ Contador de Ciclistas
 
 Projeto experimental de contagem de ciclistas utilizando webcam de baixo custo.
 
+Para informações relativas ao uso com NanoPI M3 use o branch NanoPI-M3 (https://github.com/carlosdelfino/ContadorDeCiclistas/tree/NanoPI-M3)
+
 Requisitos
 -----------
 
@@ -34,7 +36,7 @@ Exemplo:
 `bin/CycloTracker -D 0 --address Faria_Lima-2152 --record out.avi -S /dev/video1`
 
 - Necessário selecionar (clicando na tela com o endereço fornecido):
-
+  
 1) O ponto em que o contador amarelo de ciclistas da direita para a esquerda deve se localizar
 
 2) O ponto em que o contador amarelo de ciclistas da esquerda para a direita deve se localizar
