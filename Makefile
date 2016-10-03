@@ -38,43 +38,65 @@ CFLAGS=--std=c++11 \
 # -Wdouble-promotion //colocar em maquinas 32bits . autconf?
 #  https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
 
-# Using ARM specific options for optimize compiler
-# NanoPI M3 use a Cortex-A53 with a FPU Coprocessor NEON
-# Porem não sei qual variação do NEON está sendo usada, por hora manterei
-# a versão mais genérica
-CFLAGS_NanoPI_M3=-mtune=cortex-a53 \
-           -mfpu=neon \
-           -mcpu=cortex-a53 \
-           -mfloat-abi=hard \
-           -march=armv8-a+crc
-
 LDFLAGS=-lm \
 	   `pkg-config --libs opencv` \
 	   -lpthread
 
 
+# Using ARM specific options for optimize compiler
+# NanoPI M3 use a Cortex-A53 with a FPU Coprocessor NEON
+# Porem não sei qual variação do NEON está sendo usada, por hora manterei
+# a versão mais genérica
+nanopi-m3: CFLAGS+=-mtune=cortex-a53 \
+           -mfpu=neon \
+           -mcpu=cortex-a53 \
+           -mfloat-abi=hard \
+           -march=armv8-a+crc
+nanopi-m3: LDFLAGS+=-mtune=cortex-a53 \
+           -mfpu=neon \
+           -mcpu=cortex-a53 \
+           -mfloat-abi=hard \
+           -march=armv8-a+crc
+nanopi-m3: all
+
 all:$(OBJ)
 	@mkdir -p $(DISTDIR)
 	@mkdir -p tmp
-	g++ $(OBJ) -o $(DISTDIR)/$(BIN) $(LDFLAGS) $(CFLAGS_NanoPI_M3) 
+	g++ $(OBJ) -o $(DISTDIR)/$(BIN) $(LDFLAGS) 
 
 clean:
 	rm -f $(DISTDIR)/$(BIN)
 	rm -f $(OBJ)
 
 %.o: %.cpp
-	@echo CCXX $< -o $@ CFLAGS
-	@g++ -c $< -o $@ $(CFLAGS) $(CFLAGS_NanoPI_M3) 
+	@echo CCXX $< -o $@ $(CFLAGS)
+	@g++ -c $< -o $@ $(CFLAGS) 
 
-pgo-firstpass: CFLAGS += -pg -fprofile-generate --coverage
-pgo-firstpass: LDFLAGS += -pg -fprofile-generate --coverage
-pgo-firstpass:all
+pgo-msg:
+	@echo "\n\nPreprando compilação para Profiling\n"
 
-pgo-secondpass: CFLAGS += -fprofile-correction -fprofile-use
-pgo-secondpass: LDFLAGS += -fprofile-correction -fprofile-use
-pgo-secondpass:all
+PGO_FLAGS_1=-pg -fprofile-generate --coverage
+pgo-firstpass: CFLAGS+=$(PGO_FLAGS_1)
+pgo-firstpass: LDFLAGS+=$(PGO_FLAGS)
+pgo-firstpass: all
+
+PGO_FLAGS_2=-fprofile-correction -fprofile-use
+pgo-secondpass: CFLAGS+=$(PGO_FLAGS_2)
+pgo-secondpass: LDFLAGS+=$(PGO_FLAGS_2)
+pgo-secondpass: all
+
+pgo-nanopi-m3-firstpass: CFLAGS+=$(PGO_FLAGS_1)
+pgo-nanopi-m3-firstpass: LDFLAGS+=$(PGO_FLAGS_1)
+pgo-nanopi-m3-firstpass: nanopi-m3
 	
-.PHONY: pgo pgo-secondpass
+pgo-nanopi-m3-secondpass: CFLAGS+=$(PGO_FLAGS_2)
+pgo-nanopi-m3-secondpass: LDFLAGS+=$(PGO_FLAGS_2)
+pgo-nanopi-m3-secondpass: nanopi-m3
+	
+.PHONY: pgo \
+	pgo-firstpass pgo-secondpass \
+	pgo-nanopi-m3-firstpass pgo-nanopi-m3-secondpass \
+	nanopi-m3
 
 distclean: clean
 	rm -f *.gcda *.gcno *.gcov gmon.out
