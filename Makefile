@@ -87,11 +87,11 @@ pgo-secondpass: all
 
 pgo-nanopi-m3-firstpass: CFLAGS+=$(PGO_FLAGS_1)
 pgo-nanopi-m3-firstpass: LDFLAGS+=$(PGO_FLAGS_1)
-pgo-nanopi-m3-firstpass: nanopi-m3
+pgo-nanopi-m3-firstpass: clean nanopi-m3
 	
 pgo-nanopi-m3-secondpass: CFLAGS+=$(PGO_FLAGS_2)
 pgo-nanopi-m3-secondpass: LDFLAGS+=$(PGO_FLAGS_2)
-pgo-nanopi-m3-secondpass: nanopi-m3
+pgo-nanopi-m3-secondpass: clean nanopi-m3
 	
 .PHONY: pgo \
 	pgo-firstpass pgo-secondpass \
