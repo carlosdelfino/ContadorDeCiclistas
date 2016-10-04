@@ -1,2 +1,4 @@
-/.project
 !.gitignore
+.project
+.cproject
+.settings/
