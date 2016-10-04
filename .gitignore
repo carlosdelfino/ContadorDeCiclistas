@@ -6,6 +6,9 @@
 *.data
 *.log
 *.gcno
+*.gcda
+*.gcov
+gmon.out
 bin/*
 tmp/*
 gdb_cmds

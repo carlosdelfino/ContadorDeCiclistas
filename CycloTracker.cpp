@@ -577,8 +577,10 @@ int main(int argc, char **argv) {
 		if(!stream_device.empty())
 			outputDevice->write(full);
 
-		if(cv::waitKey(30) == 27)
+		if(char(cv::waitKey(30)) == char(27)){
+			printf("Tecla ESC acionada");
 			break;
+		}
 			
 		if (IsMidnight()) {
 			ot.ZeroCounters();
@@ -595,5 +597,6 @@ int main(int argc, char **argv) {
 	if(output)
 		delete output;
 	
+	exit(0);
 	return 0;
 }
