@@ -2,13 +2,19 @@ Contador de Ciclistas
 =====================
 
 Projeto experimental de contagem de ciclistas utilizando webcam de baixo custo.
+Adicionado a este Fork o uso de placa de prototipação NanoPI M3 com processador
+Cortex-A53 dotado de unidade de ponto flutuante do tipo NEON.
+
+Algumas alterações foram realizadas na compilação para que seja gerado um 
+binário 100% para o Cortex-A53.
 
 Requisitos
 -----------
 
+- GCC 4.9 (GNU-Linux-EABI)
 - OpenCv 2.4
 - V4l2Loopback
-- WebCam
+- WebCam (qualquer de R$ 20,00)
 
 Como Usar
 ---------
@@ -50,4 +56,44 @@ Exemplo:
 7) O ponto superior esquerdo da área de corte (vermelha)
 
 8) O ponto inferior direito da área de corte (vermelha)
+
+9) O ponto superior esquerdo da área de interesse (preta)
+
+10) o ponto inferior direito da área de interesse (preta)
+
+PGO Build
+---------
+
+`make pgo-firstpass`
+(Use the software for a few hours like you're used to)
+`make clean
+make pgo-secondpass`
+(The new binary is now optimised for that use)
+
+Remove PGO files
+----------------
+
+`make distclean`
+
+Analyse the generated PGO files
+-------------------------------
+
+Tools like gprof and gcov should help you :
+- analyse the generated profiles and
+- determine which parts of the code were used the most in your code.
+
+You need to run the binary, like you're used to, on the build machine first.
+
+Then :
+`gprof bin/CycloTracker gmon.out > /tmp/performance_report.txt`
+will generate a performance report in /tmp, which you can then open with a text editor.
+The report will show how much CPU time was consumed by each invoked function.
+
+`gcov CycloTracker.cpp`
+will generate approximately one gcov file per source-file referenced in CycloTracker.cpp, including itself.
+Each gcov file will be an annotated source-file which will provide you informations about which parts of
+the code were executed, which are parts were not, and how many times the executed parts were executed.
+These informations are cumulative. For example :
+- If you have a function that is executed 10 times every time you run the binary.
+- Running the same binary 5 times will show "50:function_name" in the gcov file.
 

@@ -5,6 +5,7 @@
 *.orig
 *.data
 *.log
+*.gcno
 bin/*
 tmp/*
 gdb_cmds
