@@ -1,3 +1,9 @@
+.PHONY: clean distclean \
+	pgo \
+	pgo-firstpass pgo-secondpass \
+	pgo-nanopi-m3-firstpass pgo-nanopi-m3-secondpass \
+	nanopi-m3
+
 DISTDIR=./bin/
 BIN=CycloTracker
 
@@ -72,18 +78,15 @@ clean:
 	@echo CCXX $< -o $@ $(CFLAGS)
 	@g++ -c $< -o $@ $(CFLAGS) 
 
-pgo-msg:
-	@echo "\n\nPreprando compilação para Profiling\n"
-
 PGO_FLAGS_1=-pg -fprofile-generate --coverage
 pgo-firstpass: CFLAGS+=$(PGO_FLAGS_1)
 pgo-firstpass: LDFLAGS+=$(PGO_FLAGS)
-pgo-firstpass: all
+pgo-firstpass: clean all
 
 PGO_FLAGS_2=-fprofile-correction -fprofile-use
 pgo-secondpass: CFLAGS+=$(PGO_FLAGS_2)
 pgo-secondpass: LDFLAGS+=$(PGO_FLAGS_2)
-pgo-secondpass: all
+pgo-secondpass: clean all
 
 pgo-nanopi-m3-firstpass: CFLAGS+=$(PGO_FLAGS_1)
 pgo-nanopi-m3-firstpass: LDFLAGS+=$(PGO_FLAGS_1)
@@ -93,10 +96,6 @@ pgo-nanopi-m3-secondpass: CFLAGS+=$(PGO_FLAGS_2)
 pgo-nanopi-m3-secondpass: LDFLAGS+=$(PGO_FLAGS_2)
 pgo-nanopi-m3-secondpass: clean nanopi-m3
 	
-.PHONY: pgo \
-	pgo-firstpass pgo-secondpass \
-	pgo-nanopi-m3-firstpass pgo-nanopi-m3-secondpass \
-	nanopi-m3
-
 distclean: clean
 	rm -f *.gcda *.gcno *.gcov gmon.out
+
