@@ -1,60 +1,76 @@
 Flat profile:
 
 Each sample counts as 0.01 seconds.
- no time accumulated
-
   %   cumulative   self              self     total           
- time   seconds   seconds    calls  Ts/call  Ts/call  name    
-  0.00      0.00     0.00       75     0.00     0.00  Print(char const*, cv::Point_<int>, cv::Mat&, unsigned int, unsigned int)
-  0.00      0.00     0.00       56     0.00     0.00  std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_erase(std::_Rb_tree_node<std::pair<int const, TrackedObject> >*)
-  0.00      0.00     0.00       30     0.00     0.00  ObjectCounter::GetTotalPoints()
-  0.00      0.00     0.00       15     0.00     0.00  ObjectCounter::GetLTRPoints()
-  0.00      0.00     0.00       15     0.00     0.00  ObjectCounter::GetRTLPoints()
-  0.00      0.00     0.00       15     0.00     0.00  ObjectCounter::SetReferenceBox(cv::Rect_<int>)
-  0.00      0.00     0.00       15     0.00     0.00  ObjectLocator::DetectObjects(cv::Mat&)
-  0.00      0.00     0.00       15     0.00     0.00  ObjectLocator::GetBoundingBoxFromContour(std::vector<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > >, std::allocator<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > > > >)
-  0.00      0.00     0.00       15     0.00     0.00  ObjectTracker::CreateNewTracker()
-  0.00      0.00     0.00       15     0.00     0.00  ObjectTracker::AccountNewObjects(cv::Mat&)
-  0.00      0.00     0.00       15     0.00     0.00  ObjectTracker::AddRectanglesToTracker(cv::Mat&, cv::Mat&)
-  0.00      0.00     0.00       15     0.00     0.00  ObjectTracker::GetTotal()
-  0.00      0.00     0.00       15     0.00     0.00  ImageProcessor::PerspectiveTransform(cv::Mat&, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>)
-  0.00      0.00     0.00       15     0.00     0.00  ImageProcessor::CropImage(cv::Mat&, cv::Rect_<int>)
-  0.00      0.00     0.00       14     0.00     0.00  PointTracker::PointTracker(unsigned int, PointTracker)
-  0.00      0.00     0.00       14     0.00     0.00  RectangleTracker::RectangleTracker(unsigned int, PointTracker)
-  0.00      0.00     0.00       14     0.00     0.00  std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::operator=(std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > > const&)
-  0.00      0.00     0.00        4     0.00     0.00  Config::GetPerspectivePos(unsigned int)
-  0.00      0.00     0.00        3     0.00     0.00  std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_copy(std::_Rb_tree_node<std::pair<int const, TrackedObject> > const*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*)
-  0.00      0.00     0.00        2     0.00     0.00  Config::GetCropPos(unsigned int)
-  0.00      0.00     0.00        2     0.00     0.00  Config::GetCounterPos(unsigned int)
-  0.00      0.00     0.00        2     0.00     0.00  Config::GetInterestPos(unsigned int)
-  0.00      0.00     0.00        2     0.00     0.00  Config::Config()
-  0.00      0.00     0.00        2     0.00     0.00  Config::~Config()
-  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z10IsMidnightv
-  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z18RetrieveSensorDataPKcP10SensorData
-  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN11VideoOutputC2EPKc
-  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN12PointTracker19DistanceInThresholdERN2cv6Point_IiEES3_
-  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN13ObjectCounterC2EN2cv5Rect_IiEE
-  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN13ObjectLocatorC2Ed
-  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN13ObjectTrackerC2EjdN2cv5Rect_IiEE
-  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN13TrackedObjectC2Ev
-  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN14CoordTransformC2Ev
-  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN14ImageProcessorC2Ev
-  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN6CameraC2Ev
-  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I_x_counter
-  0.00      0.00     0.00        1     0.00     0.00  PointTracker::AddPoint(cv::Point_<int>&, cv::Rect_<int>&)
-  0.00      0.00     0.00        1     0.00     0.00  ObjectCounter::ObjectCounter(cv::Rect_<int>)
-  0.00      0.00     0.00        1     0.00     0.00  ObjectLocator::ObjectLocator(double)
-  0.00      0.00     0.00        1     0.00     0.00  TrackedObject::TrackedObject(cv::Point_<int>, cv::Rect_<int>, unsigned int, bool)
-  0.00      0.00     0.00        1     0.00     0.00  TrackedObject::TrackedObject()
-  0.00      0.00     0.00        1     0.00     0.00  RectangleTracker::AddRectangle(cv::Rect_<int>&)
-  0.00      0.00     0.00        1     0.00     0.00  RectangleTracker::RectangleTracker(unsigned int)
-  0.00      0.00     0.00        1     0.00     0.00  Config::GetLeftCounter()
-  0.00      0.00     0.00        1     0.00     0.00  Config::GetRightCounter()
-  0.00      0.00     0.00        1     0.00     0.00  void std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_emplace_back_aux<cv::Rect_<int> const&>(cv::Rect_<int> const&)
-  0.00      0.00     0.00        1     0.00     0.00  std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_insert_node(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*)
-  0.00      0.00     0.00        1     0.00     0.00  std::_Rb_tree_iterator<std::pair<int const, TrackedObject> > std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<int&&>, std::tuple<> >(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, std::piecewise_construct_t const&, std::tuple<int&&>&&, std::tuple<>&&)
-  0.00      0.00     0.00        1     0.00     0.00  std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_unique_pos(int const&)
-  0.00      0.00     0.00        1     0.00     0.00  std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, int const&)
+ time   seconds   seconds    calls  us/call  us/call  name    
+ 55.09      2.92     2.92                             cv::Mat::~Mat()
+ 15.85      3.76     0.84                             __gcov_indirect_call_profiler_v2
+ 10.94      4.34     0.58                             __gcov_time_profiler
+  2.45      4.47     0.13    21793     5.97     5.97  ImageProcessor::PerspectiveTransform(cv::Mat&, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>)
+  1.51      4.55     0.08                             ProvidePip(cv::Mat&, cv::Mat&)
+  1.32      4.62     0.07                             ObjectTracker::PrintTotal(cv::Mat&)
+  1.32      4.69     0.07                             ImageProcessor::AcquireForeground(cv::Mat&)
+  1.13      4.75     0.06                             ProvideOsd(cv::Mat&, SensorData*, ObjectTracker&)
+  1.13      4.81     0.06                             cv::Mat::operator=(cv::Mat const&)
+  0.94      4.86     0.05    21793     2.29     4.13  ObjectLocator::DetectObjects(cv::Mat&)
+  0.75      4.90     0.04    21793     1.84     1.84  ImageProcessor::CropImage(cv::Mat&, cv::Rect_<int>)
+  0.75      4.94     0.04                             ObjectTracker::PrintRightPartial(cv::Mat&, cv::Point_<int>)
+  0.57      4.97     0.03   108965     0.28     0.28  Print(char const*, cv::Point_<int>, cv::Mat&, unsigned int, unsigned int)
+  0.57      5.00     0.03    43586     0.69     0.69  ObjectCounter::GetTotalPoints()
+  0.57      5.03     0.03    21792     1.38     2.87  PointTracker::PointTracker(unsigned int, PointTracker)
+  0.57      5.06     0.03    21792     1.38     1.49  std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::operator=(std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > > const&)
+  0.38      5.08     0.02    21793     0.92     1.84  ObjectLocator::GetBoundingBoxFromContour(std::vector<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > >, std::allocator<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > > > >)
+  0.38      5.10     0.02    21793     0.92     1.03  ObjectTracker::AccountNewObjects(cv::Mat&)
+  0.38      5.12     0.02    21793     0.92     6.42  ObjectTracker::AddRectanglesToTracker(cv::Mat&, cv::Mat&)
+  0.38      5.14     0.02    21793     0.92     1.61  ObjectTracker::GetTotal()
+  0.38      5.16     0.02     3729     5.36     5.36  void std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_emplace_back_aux<cv::Rect_<int> const&>(cv::Rect_<int> const&)
+  0.38      5.18     0.02                             IsMidnight()
+  0.38      5.20     0.02                             ImageProcessor::PrepareFrame(cv::Mat&, cv::Rect_<int>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>)
+  0.38      5.22     0.02                             ImageProcessor::InsertInterestArea(cv::Mat&, cv::Rect_<int>)
+  0.19      5.23     0.01    87168     0.11     0.11  std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_erase(std::_Rb_tree_node<std::pair<int const, TrackedObject> >*)
+  0.19      5.24     0.01    21793     0.46     4.02  ObjectTracker::CreateNewTracker()
+  0.19      5.25     0.01    21792     0.46     3.44  RectangleTracker::RectangleTracker(unsigned int, PointTracker)
+  0.19      5.26     0.01     5055     1.98     5.93  PointTracker::AddPoint(cv::Point_<int>&, cv::Rect_<int>&)
+  0.19      5.27     0.01     4470     2.24     4.47  std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, int const&)
+  0.19      5.28     0.01     1517     6.59     6.59  std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_unique_pos(int const&)
+  0.19      5.29     0.01                             ObjectTracker::SetInterestArea(cv::Rect_<int>)
+  0.19      5.30     0.01                             __gcov_read_counter
+  0.00      5.30     0.00    21793     0.00     0.00  ObjectCounter::GetLTRPoints()
+  0.00      5.30     0.00    21793     0.00     0.00  ObjectCounter::GetRTLPoints()
+  0.00      5.30     0.00    21793     0.00     0.00  ObjectCounter::SetReferenceBox(cv::Rect_<int>)
+  0.00      5.30     0.00     5055     0.00     5.93  RectangleTracker::AddRectangle(cv::Rect_<int>&)
+  0.00      5.30     0.00     4551     0.00     0.00  std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_copy(std::_Rb_tree_node<std::pair<int const, TrackedObject> > const*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*)
+  0.00      5.30     0.00     4470     0.00     0.00  TrackedObject::TrackedObject()
+  0.00      5.30     0.00     4470     0.00     0.00  std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_insert_node(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*)
+  0.00      5.30     0.00     4470     0.00     4.47  std::_Rb_tree_iterator<std::pair<int const, TrackedObject> > std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<int&&>, std::tuple<> >(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, std::piecewise_construct_t const&, std::tuple<int&&>&&, std::tuple<>&&)
+  0.00      5.30     0.00     4469     0.00     0.00  ObjectCounter::AccountPoint(TrackedObject)
+  0.00      5.30     0.00     1431     0.00     0.00  TrackedObject::TrackedObject(cv::Point_<int>, cv::Rect_<int>, unsigned int, bool)
+  0.00      5.30     0.00        8     0.00     0.00  Config::Config()
+  0.00      5.30     0.00        8     0.00     0.00  Config::~Config()
+  0.00      5.30     0.00        6     0.00     0.00  ObjectTracker::PersistImage(cv::Mat&)
+  0.00      5.30     0.00        4     0.00     0.00  Config::SetRightCounter(unsigned int)
+  0.00      5.30     0.00        4     0.00     0.00  Config::GetPerspectivePos(unsigned int)
+  0.00      5.30     0.00        2     0.00     0.00  Config::GetCropPos(unsigned int)
+  0.00      5.30     0.00        2     0.00     0.00  Config::GetCounterPos(unsigned int)
+  0.00      5.30     0.00        2     0.00     0.00  Config::GetInterestPos(unsigned int)
+  0.00      5.30     0.00        2     0.00     0.00  Config::SetLeftCounter(unsigned int)
+  0.00      5.30     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z10IsMidnightv
+  0.00      5.30     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z18RetrieveSensorDataPKcP10SensorData
+  0.00      5.30     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN11VideoOutputC2EPKc
+  0.00      5.30     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN12PointTracker19DistanceInThresholdERN2cv6Point_IiEES3_
+  0.00      5.30     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN13ObjectCounterC2EN2cv5Rect_IiEE
+  0.00      5.30     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN13ObjectLocatorC2Ed
+  0.00      5.30     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN13ObjectTrackerC2EjdN2cv5Rect_IiEE
+  0.00      5.30     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN13TrackedObjectC2Ev
+  0.00      5.30     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN14CoordTransformC2Ev
+  0.00      5.30     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN14ImageProcessorC2Ev
+  0.00      5.30     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN6CameraC2Ev
+  0.00      5.30     0.00        1     0.00     0.00  _GLOBAL__sub_I_x_counter
+  0.00      5.30     0.00        1     0.00     0.00  ObjectCounter::ObjectCounter(cv::Rect_<int>)
+  0.00      5.30     0.00        1     0.00     0.00  ObjectLocator::ObjectLocator(double)
+  0.00      5.30     0.00        1     0.00     0.00  RectangleTracker::RectangleTracker(unsigned int)
+  0.00      5.30     0.00        1     0.00     0.00  Config::GetLeftCounter()
+  0.00      5.30     0.00        1     0.00     0.00  Config::GetRightCounter()
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -92,193 +108,270 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 4 byte(s) no time propagated
+granularity: each sample hit covers 4 byte(s) for 0.19% of 5.30 seconds
 
 index % time    self  children    called     name
-                0.00    0.00      75/75          ProvideOsd(cv::Mat&, SensorData*, ObjectTracker&) [96]
-[33]     0.0    0.00    0.00      75         Print(char const*, cv::Point_<int>, cv::Mat&, unsigned int, unsigned int) [33]
+                                                 <spontaneous>
+[1]     55.1    2.92    0.00                 cv::Mat::~Mat() [1]
 -----------------------------------------------
-                0.00    0.00      14/56          ObjectTracker::AccountNewObjects(cv::Mat&) [42]
-                0.00    0.00      14/56          ObjectTracker::CreateNewTracker() [41]
-                0.00    0.00      14/56          RectangleTracker::RectangleTracker(unsigned int, PointTracker) [48]
-                0.00    0.00      14/56          std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::operator=(std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > > const&) [49]
-[34]     0.0    0.00    0.00      56         std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_erase(std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [34]
+                                                 <spontaneous>
+[2]     15.8    0.84    0.00                 __gcov_indirect_call_profiler_v2 [2]
 -----------------------------------------------
-                0.00    0.00      15/30          ObjectTracker::GetTotal() [44]
-                0.00    0.00      15/30          ObjectTracker::PrintTotal(cv::Mat&) [115]
-[35]     0.0    0.00    0.00      30         ObjectCounter::GetTotalPoints() [35]
+                                                 <spontaneous>
+[3]     10.9    0.58    0.00                 __gcov_time_profiler [3]
 -----------------------------------------------
-                0.00    0.00      15/15          ObjectTracker::PrintRightPartial(cv::Mat&, cv::Point_<int>) [125]
-[36]     0.0    0.00    0.00      15         ObjectCounter::GetLTRPoints() [36]
+                                                 <spontaneous>
+[4]      4.7    0.00    0.25                 ObjectTracker::IterateTracker(cv::Mat&, cv::Mat&) [4]
+                0.02    0.12   21793/21793       ObjectTracker::AddRectanglesToTracker(cv::Mat&, cv::Mat&) [6]
+                0.01    0.08   21793/21793       ObjectTracker::CreateNewTracker() [10]
+                0.02    0.00   21793/21793       ObjectTracker::AccountNewObjects(cv::Mat&) [26]
 -----------------------------------------------
-                0.00    0.00      15/15          ObjectTracker::PrintLeftPartial(cv::Mat&, cv::Point_<int>) [124]
-[37]     0.0    0.00    0.00      15         ObjectCounter::GetRTLPoints() [37]
+                                                 <spontaneous>
+[5]      3.6    0.02    0.17                 ImageProcessor::PrepareFrame(cv::Mat&, cv::Rect_<int>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>) [5]
+                0.13    0.00   21793/21793       ImageProcessor::PerspectiveTransform(cv::Mat&, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>) [7]
+                0.04    0.00   21793/21793       ImageProcessor::CropImage(cv::Mat&, cv::Rect_<int>) [18]
 -----------------------------------------------
-                0.00    0.00      15/15          ObjectTracker::SetInterestArea(cv::Rect_<int>) [123]
-[38]     0.0    0.00    0.00      15         ObjectCounter::SetReferenceBox(cv::Rect_<int>) [38]
+                0.02    0.12   21793/21793       ObjectTracker::IterateTracker(cv::Mat&, cv::Mat&) [4]
+[6]      2.6    0.02    0.12   21793         ObjectTracker::AddRectanglesToTracker(cv::Mat&, cv::Mat&) [6]
+                0.05    0.04   21793/21793       ObjectLocator::DetectObjects(cv::Mat&) [9]
+                0.00    0.03    5055/5055        RectangleTracker::AddRectangle(cv::Rect_<int>&) [25]
 -----------------------------------------------
-                0.00    0.00      15/15          ObjectTracker::AddRectanglesToTracker(cv::Mat&, cv::Mat&) [43]
-[39]     0.0    0.00    0.00      15         ObjectLocator::DetectObjects(cv::Mat&) [39]
-                0.00    0.00      15/15          ObjectLocator::GetBoundingBoxFromContour(std::vector<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > >, std::allocator<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > > > >) [40]
+                0.13    0.00   21793/21793       ImageProcessor::PrepareFrame(cv::Mat&, cv::Rect_<int>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>) [5]
+[7]      2.5    0.13    0.00   21793         ImageProcessor::PerspectiveTransform(cv::Mat&, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>) [7]
 -----------------------------------------------
-                0.00    0.00      15/15          ObjectLocator::DetectObjects(cv::Mat&) [39]
-[40]     0.0    0.00    0.00      15         ObjectLocator::GetBoundingBoxFromContour(std::vector<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > >, std::allocator<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > > > >) [40]
-                0.00    0.00       1/1           void std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_emplace_back_aux<cv::Rect_<int> const&>(cv::Rect_<int> const&) [78]
+                                                 <spontaneous>
+[8]      2.4    0.06    0.07                 ProvideOsd(cv::Mat&, SensorData*, ObjectTracker&) [8]
+                0.02    0.01   21793/21793       ObjectTracker::GetTotal() [20]
+                0.03    0.00  108965/108965      Print(char const*, cv::Point_<int>, cv::Mat&, unsigned int, unsigned int) [22]
 -----------------------------------------------
-                0.00    0.00      15/15          ObjectTracker::IterateTracker(cv::Mat&, cv::Mat&) [121]
-[41]     0.0    0.00    0.00      15         ObjectTracker::CreateNewTracker() [41]
-                0.00    0.00      14/14          RectangleTracker::RectangleTracker(unsigned int, PointTracker) [48]
-                0.00    0.00      14/56          std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_erase(std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [34]
-                0.00    0.00       1/3           std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_copy(std::_Rb_tree_node<std::pair<int const, TrackedObject> > const*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [51]
-                0.00    0.00       1/1           RectangleTracker::RectangleTracker(unsigned int) [75]
+                0.05    0.04   21793/21793       ObjectTracker::AddRectanglesToTracker(cv::Mat&, cv::Mat&) [6]
+[9]      1.7    0.05    0.04   21793         ObjectLocator::DetectObjects(cv::Mat&) [9]
+                0.02    0.02   21793/21793       ObjectLocator::GetBoundingBoxFromContour(std::vector<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > >, std::allocator<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > > > >) [17]
 -----------------------------------------------
-                0.00    0.00      15/15          ObjectTracker::IterateTracker(cv::Mat&, cv::Mat&) [121]
-[42]     0.0    0.00    0.00      15         ObjectTracker::AccountNewObjects(cv::Mat&) [42]
-                0.00    0.00      14/56          std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_erase(std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [34]
+                0.01    0.08   21793/21793       ObjectTracker::IterateTracker(cv::Mat&, cv::Mat&) [4]
+[10]     1.7    0.01    0.08   21793         ObjectTracker::CreateNewTracker() [10]
+                0.01    0.07   21792/21792       RectangleTracker::RectangleTracker(unsigned int, PointTracker) [13]
+                0.00    0.00   21792/87168       std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_erase(std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [32]
+                0.00    0.00    1517/4551        std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_copy(std::_Rb_tree_node<std::pair<int const, TrackedObject> > const*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [71]
+                0.00    0.00       1/1           RectangleTracker::RectangleTracker(unsigned int) [99]
 -----------------------------------------------
-                0.00    0.00      15/15          ObjectTracker::IterateTracker(cv::Mat&, cv::Mat&) [121]
-[43]     0.0    0.00    0.00      15         ObjectTracker::AddRectanglesToTracker(cv::Mat&, cv::Mat&) [43]
-                0.00    0.00      15/15          ObjectLocator::DetectObjects(cv::Mat&) [39]
-                0.00    0.00       1/1           RectangleTracker::AddRectangle(cv::Rect_<int>&) [74]
+                                                 <spontaneous>
+[11]     1.6    0.07    0.01                 ObjectTracker::PrintTotal(cv::Mat&) [11]
+                0.01    0.00   21793/43586       ObjectCounter::GetTotalPoints() [23]
 -----------------------------------------------
-                0.00    0.00      15/15          ProvideOsd(cv::Mat&, SensorData*, ObjectTracker&) [96]
-[44]     0.0    0.00    0.00      15         ObjectTracker::GetTotal() [44]
-                0.00    0.00      15/30          ObjectCounter::GetTotalPoints() [35]
+                                                 <spontaneous>
+[12]     1.5    0.08    0.00                 ProvidePip(cv::Mat&, cv::Mat&) [12]
 -----------------------------------------------
-                0.00    0.00      15/15          ImageProcessor::PrepareFrame(cv::Mat&, cv::Rect_<int>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>) [133]
-[45]     0.0    0.00    0.00      15         ImageProcessor::PerspectiveTransform(cv::Mat&, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>) [45]
+                0.01    0.07   21792/21792       ObjectTracker::CreateNewTracker() [10]
+[13]     1.4    0.01    0.07   21792         RectangleTracker::RectangleTracker(unsigned int, PointTracker) [13]
+                0.03    0.03   21792/21792       PointTracker::PointTracker(unsigned int, PointTracker) [15]
+                0.00    0.00   21792/87168       std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_erase(std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [32]
+                0.00    0.00    1517/4551        std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_copy(std::_Rb_tree_node<std::pair<int const, TrackedObject> > const*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [71]
 -----------------------------------------------
-                0.00    0.00      15/15          ImageProcessor::PrepareFrame(cv::Mat&, cv::Rect_<int>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>) [133]
-[46]     0.0    0.00    0.00      15         ImageProcessor::CropImage(cv::Mat&, cv::Rect_<int>) [46]
+                                                 <spontaneous>
+[14]     1.3    0.07    0.00                 ImageProcessor::AcquireForeground(cv::Mat&) [14]
 -----------------------------------------------
-                0.00    0.00      14/14          RectangleTracker::RectangleTracker(unsigned int, PointTracker) [48]
-[47]     0.0    0.00    0.00      14         PointTracker::PointTracker(unsigned int, PointTracker) [47]
-                0.00    0.00      14/14          std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::operator=(std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > > const&) [49]
+                0.03    0.03   21792/21792       RectangleTracker::RectangleTracker(unsigned int, PointTracker) [13]
+[15]     1.2    0.03    0.03   21792         PointTracker::PointTracker(unsigned int, PointTracker) [15]
+                0.03    0.00   21792/21792       std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::operator=(std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > > const&) [21]
 -----------------------------------------------
-                0.00    0.00      14/14          ObjectTracker::CreateNewTracker() [41]
-[48]     0.0    0.00    0.00      14         RectangleTracker::RectangleTracker(unsigned int, PointTracker) [48]
-                0.00    0.00      14/14          PointTracker::PointTracker(unsigned int, PointTracker) [47]
-                0.00    0.00      14/56          std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_erase(std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [34]
-                0.00    0.00       1/3           std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_copy(std::_Rb_tree_node<std::pair<int const, TrackedObject> > const*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [51]
+                                                 <spontaneous>
+[16]     1.1    0.06    0.00                 cv::Mat::operator=(cv::Mat const&) [16]
 -----------------------------------------------
-                0.00    0.00      14/14          PointTracker::PointTracker(unsigned int, PointTracker) [47]
-[49]     0.0    0.00    0.00      14         std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::operator=(std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > > const&) [49]
-                0.00    0.00      14/56          std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_erase(std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [34]
-                0.00    0.00       1/3           std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_copy(std::_Rb_tree_node<std::pair<int const, TrackedObject> > const*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [51]
+                0.02    0.02   21793/21793       ObjectLocator::DetectObjects(cv::Mat&) [9]
+[17]     0.8    0.02    0.02   21793         ObjectLocator::GetBoundingBoxFromContour(std::vector<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > >, std::allocator<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > > > >) [17]
+                0.02    0.00    3729/3729        void std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_emplace_back_aux<cv::Rect_<int> const&>(cv::Rect_<int> const&) [29]
 -----------------------------------------------
-                0.00    0.00       4/4           LoadConfiguration() [100]
-[50]     0.0    0.00    0.00       4         Config::GetPerspectivePos(unsigned int) [50]
+                0.04    0.00   21793/21793       ImageProcessor::PrepareFrame(cv::Mat&, cv::Rect_<int>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>) [5]
+[18]     0.8    0.04    0.00   21793         ImageProcessor::CropImage(cv::Mat&, cv::Rect_<int>) [18]
 -----------------------------------------------
-                0.00    0.00       1/3           ObjectTracker::CreateNewTracker() [41]
-                0.00    0.00       1/3           RectangleTracker::RectangleTracker(unsigned int, PointTracker) [48]
-                0.00    0.00       1/3           std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::operator=(std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > > const&) [49]
-[51]     0.0    0.00    0.00       3         std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_copy(std::_Rb_tree_node<std::pair<int const, TrackedObject> > const*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [51]
+                                                 <spontaneous>
+[19]     0.8    0.04    0.00                 ObjectTracker::PrintRightPartial(cv::Mat&, cv::Point_<int>) [19]
+                0.00    0.00   21793/21793       ObjectCounter::GetLTRPoints() [68]
 -----------------------------------------------
-                0.00    0.00       2/2           LoadConfiguration() [100]
-[52]     0.0    0.00    0.00       2         Config::GetCropPos(unsigned int) [52]
+                0.02    0.01   21793/21793       ProvideOsd(cv::Mat&, SensorData*, ObjectTracker&) [8]
+[20]     0.7    0.02    0.01   21793         ObjectTracker::GetTotal() [20]
+                0.01    0.00   21793/43586       ObjectCounter::GetTotalPoints() [23]
 -----------------------------------------------
-                0.00    0.00       2/2           LoadConfiguration() [100]
-[53]     0.0    0.00    0.00       2         Config::GetCounterPos(unsigned int) [53]
+                0.03    0.00   21792/21792       PointTracker::PointTracker(unsigned int, PointTracker) [15]
+[21]     0.6    0.03    0.00   21792         std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::operator=(std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > > const&) [21]
+                0.00    0.00   21792/87168       std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_erase(std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [32]
+                0.00    0.00    1517/4551        std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_copy(std::_Rb_tree_node<std::pair<int const, TrackedObject> > const*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [71]
 -----------------------------------------------
-                0.00    0.00       2/2           LoadConfiguration() [100]
-[54]     0.0    0.00    0.00       2         Config::GetInterestPos(unsigned int) [54]
+                0.03    0.00  108965/108965      ProvideOsd(cv::Mat&, SensorData*, ObjectTracker&) [8]
+[22]     0.6    0.03    0.00  108965         Print(char const*, cv::Point_<int>, cv::Mat&, unsigned int, unsigned int) [22]
 -----------------------------------------------
-                0.00    0.00       1/2           LoadConfiguration() [100]
-                0.00    0.00       1/2           ObjectCounter::ObjectCounter(cv::Rect_<int>) [70]
-[55]     0.0    0.00    0.00       2         Config::Config() [55]
+                0.01    0.00   21793/43586       ObjectTracker::GetTotal() [20]
+                0.01    0.00   21793/43586       ObjectTracker::PrintTotal(cv::Mat&) [11]
+[23]     0.6    0.03    0.00   43586         ObjectCounter::GetTotalPoints() [23]
 -----------------------------------------------
-                0.00    0.00       1/2           LoadConfiguration() [100]
-                0.00    0.00       1/2           ObjectCounter::ObjectCounter(cv::Rect_<int>) [70]
-[56]     0.0    0.00    0.00       2         Config::~Config() [56]
+                0.01    0.02    5055/5055        RectangleTracker::AddRectangle(cv::Rect_<int>&) [25]
+[24]     0.6    0.01    0.02    5055         PointTracker::AddPoint(cv::Point_<int>&, cv::Rect_<int>&) [24]
+                0.00    0.02    4470/4470        std::_Rb_tree_iterator<std::pair<int const, TrackedObject> > std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<int&&>, std::tuple<> >(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, std::piecewise_construct_t const&, std::tuple<int&&>&&, std::tuple<>&&) [27]
+                0.00    0.00    1431/1431        TrackedObject::TrackedObject(cv::Point_<int>, cv::Rect_<int>, unsigned int, bool) [75]
+-----------------------------------------------
+                0.00    0.03    5055/5055        ObjectTracker::AddRectanglesToTracker(cv::Mat&, cv::Mat&) [6]
+[25]     0.6    0.00    0.03    5055         RectangleTracker::AddRectangle(cv::Rect_<int>&) [25]
+                0.01    0.02    5055/5055        PointTracker::AddPoint(cv::Point_<int>&, cv::Rect_<int>&) [24]
+-----------------------------------------------
+                0.02    0.00   21793/21793       ObjectTracker::IterateTracker(cv::Mat&, cv::Mat&) [4]
+[26]     0.4    0.02    0.00   21793         ObjectTracker::AccountNewObjects(cv::Mat&) [26]
+                0.00    0.00   21792/87168       std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_erase(std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [32]
+                0.00    0.00    4469/4469        ObjectCounter::AccountPoint(TrackedObject) [74]
+                0.00    0.00       6/6           ObjectTracker::PersistImage(cv::Mat&) [78]
+-----------------------------------------------
+                0.00    0.02    4470/4470        PointTracker::AddPoint(cv::Point_<int>&, cv::Rect_<int>&) [24]
+[27]     0.4    0.00    0.02    4470         std::_Rb_tree_iterator<std::pair<int const, TrackedObject> > std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<int&&>, std::tuple<> >(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, std::piecewise_construct_t const&, std::tuple<int&&>&&, std::tuple<>&&) [27]
+                0.01    0.01    4470/4470        std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, int const&) [28]
+                0.00    0.00    4470/4470        TrackedObject::TrackedObject() [72]
+                0.00    0.00    4470/4470        std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_insert_node(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [73]
+-----------------------------------------------
+                0.01    0.01    4470/4470        std::_Rb_tree_iterator<std::pair<int const, TrackedObject> > std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<int&&>, std::tuple<> >(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, std::piecewise_construct_t const&, std::tuple<int&&>&&, std::tuple<>&&) [27]
+[28]     0.4    0.01    0.01    4470         std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, int const&) [28]
+                0.01    0.00    1517/1517        std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_unique_pos(int const&) [33]
+-----------------------------------------------
+                0.02    0.00    3729/3729        ObjectLocator::GetBoundingBoxFromContour(std::vector<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > >, std::allocator<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > > > >) [17]
+[29]     0.4    0.02    0.00    3729         void std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_emplace_back_aux<cv::Rect_<int> const&>(cv::Rect_<int> const&) [29]
+-----------------------------------------------
+                                                 <spontaneous>
+[30]     0.4    0.02    0.00                 IsMidnight() [30]
+-----------------------------------------------
+                                                 <spontaneous>
+[31]     0.4    0.02    0.00                 ImageProcessor::InsertInterestArea(cv::Mat&, cv::Rect_<int>) [31]
+-----------------------------------------------
+                0.00    0.00   21792/87168       ObjectTracker::AccountNewObjects(cv::Mat&) [26]
+                0.00    0.00   21792/87168       ObjectTracker::CreateNewTracker() [10]
+                0.00    0.00   21792/87168       RectangleTracker::RectangleTracker(unsigned int, PointTracker) [13]
+                0.00    0.00   21792/87168       std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::operator=(std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > > const&) [21]
+[32]     0.2    0.01    0.00   87168         std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_erase(std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [32]
+-----------------------------------------------
+                0.01    0.00    1517/1517        std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, int const&) [28]
+[33]     0.2    0.01    0.00    1517         std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_unique_pos(int const&) [33]
+-----------------------------------------------
+                                                 <spontaneous>
+[34]     0.2    0.01    0.00                 ObjectTracker::SetInterestArea(cv::Rect_<int>) [34]
+                0.00    0.00   21793/21793       ObjectCounter::SetReferenceBox(cv::Rect_<int>) [70]
+-----------------------------------------------
+                                                 <spontaneous>
+[35]     0.2    0.01    0.00                 __gcov_read_counter [35]
+-----------------------------------------------
+                0.00    0.00   21793/21793       ObjectTracker::PrintRightPartial(cv::Mat&, cv::Point_<int>) [19]
+[68]     0.0    0.00    0.00   21793         ObjectCounter::GetLTRPoints() [68]
+-----------------------------------------------
+                0.00    0.00   21793/21793       ObjectTracker::PrintLeftPartial(cv::Mat&, cv::Point_<int>) [135]
+[69]     0.0    0.00    0.00   21793         ObjectCounter::GetRTLPoints() [69]
+-----------------------------------------------
+                0.00    0.00   21793/21793       ObjectTracker::SetInterestArea(cv::Rect_<int>) [34]
+[70]     0.0    0.00    0.00   21793         ObjectCounter::SetReferenceBox(cv::Rect_<int>) [70]
+-----------------------------------------------
+                                4551             std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_copy(std::_Rb_tree_node<std::pair<int const, TrackedObject> > const*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [71]
+                0.00    0.00    1517/4551        ObjectTracker::CreateNewTracker() [10]
+                0.00    0.00    1517/4551        RectangleTracker::RectangleTracker(unsigned int, PointTracker) [13]
+                0.00    0.00    1517/4551        std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::operator=(std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > > const&) [21]
+[71]     0.0    0.00    0.00    4551+4551    std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_copy(std::_Rb_tree_node<std::pair<int const, TrackedObject> > const*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [71]
+                                4551             std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_copy(std::_Rb_tree_node<std::pair<int const, TrackedObject> > const*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [71]
+-----------------------------------------------
+                0.00    0.00    4470/4470        std::_Rb_tree_iterator<std::pair<int const, TrackedObject> > std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<int&&>, std::tuple<> >(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, std::piecewise_construct_t const&, std::tuple<int&&>&&, std::tuple<>&&) [27]
+[72]     0.0    0.00    0.00    4470         TrackedObject::TrackedObject() [72]
+-----------------------------------------------
+                0.00    0.00    4470/4470        std::_Rb_tree_iterator<std::pair<int const, TrackedObject> > std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<int&&>, std::tuple<> >(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, std::piecewise_construct_t const&, std::tuple<int&&>&&, std::tuple<>&&) [27]
+[73]     0.0    0.00    0.00    4470         std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_insert_node(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [73]
+-----------------------------------------------
+                0.00    0.00    4469/4469        ObjectTracker::AccountNewObjects(cv::Mat&) [26]
+[74]     0.0    0.00    0.00    4469         ObjectCounter::AccountPoint(TrackedObject) [74]
+                0.00    0.00       6/8           Config::Config() [76]
+                0.00    0.00       6/8           Config::~Config() [77]
+                0.00    0.00       4/4           Config::SetRightCounter(unsigned int) [79]
+                0.00    0.00       2/2           Config::SetLeftCounter(unsigned int) [84]
+-----------------------------------------------
+                0.00    0.00    1431/1431        PointTracker::AddPoint(cv::Point_<int>&, cv::Rect_<int>&) [24]
+[75]     0.0    0.00    0.00    1431         TrackedObject::TrackedObject(cv::Point_<int>, cv::Rect_<int>, unsigned int, bool) [75]
+-----------------------------------------------
+                0.00    0.00       1/8           LoadConfiguration() [116]
+                0.00    0.00       1/8           ObjectCounter::ObjectCounter(cv::Rect_<int>) [97]
+                0.00    0.00       6/8           ObjectCounter::AccountPoint(TrackedObject) [74]
+[76]     0.0    0.00    0.00       8         Config::Config() [76]
+-----------------------------------------------
+                0.00    0.00       1/8           LoadConfiguration() [116]
+                0.00    0.00       1/8           ObjectCounter::ObjectCounter(cv::Rect_<int>) [97]
+                0.00    0.00       6/8           ObjectCounter::AccountPoint(TrackedObject) [74]
+[77]     0.0    0.00    0.00       8         Config::~Config() [77]
+-----------------------------------------------
+                0.00    0.00       6/6           ObjectTracker::AccountNewObjects(cv::Mat&) [26]
+[78]     0.0    0.00    0.00       6         ObjectTracker::PersistImage(cv::Mat&) [78]
+-----------------------------------------------
+                0.00    0.00       4/4           ObjectCounter::AccountPoint(TrackedObject) [74]
+[79]     0.0    0.00    0.00       4         Config::SetRightCounter(unsigned int) [79]
+-----------------------------------------------
+                0.00    0.00       4/4           LoadConfiguration() [116]
+[80]     0.0    0.00    0.00       4         Config::GetPerspectivePos(unsigned int) [80]
+-----------------------------------------------
+                0.00    0.00       2/2           LoadConfiguration() [116]
+[81]     0.0    0.00    0.00       2         Config::GetCropPos(unsigned int) [81]
+-----------------------------------------------
+                0.00    0.00       2/2           LoadConfiguration() [116]
+[82]     0.0    0.00    0.00       2         Config::GetCounterPos(unsigned int) [82]
+-----------------------------------------------
+                0.00    0.00       2/2           LoadConfiguration() [116]
+[83]     0.0    0.00    0.00       2         Config::GetInterestPos(unsigned int) [83]
+-----------------------------------------------
+                0.00    0.00       2/2           ObjectCounter::AccountPoint(TrackedObject) [74]
+[84]     0.0    0.00    0.00       2         Config::SetLeftCounter(unsigned int) [84]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [231]
-[57]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z10IsMidnightv [57]
+[85]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z10IsMidnightv [85]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [231]
-[58]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z18RetrieveSensorDataPKcP10SensorData [58]
+[86]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z18RetrieveSensorDataPKcP10SensorData [86]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [231]
-[59]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN11VideoOutputC2EPKc [59]
+[87]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN11VideoOutputC2EPKc [87]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [231]
-[60]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN12PointTracker19DistanceInThresholdERN2cv6Point_IiEES3_ [60]
+[88]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN12PointTracker19DistanceInThresholdERN2cv6Point_IiEES3_ [88]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [231]
-[61]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN13ObjectCounterC2EN2cv5Rect_IiEE [61]
+[89]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN13ObjectCounterC2EN2cv5Rect_IiEE [89]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [231]
-[62]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN13ObjectLocatorC2Ed [62]
+[90]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN13ObjectLocatorC2Ed [90]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [231]
-[63]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN13ObjectTrackerC2EjdN2cv5Rect_IiEE [63]
+[91]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN13ObjectTrackerC2EjdN2cv5Rect_IiEE [91]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [231]
-[64]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN13TrackedObjectC2Ev [64]
+[92]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN13TrackedObjectC2Ev [92]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [231]
-[65]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN14CoordTransformC2Ev [65]
+[93]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN14CoordTransformC2Ev [93]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [231]
-[66]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN14ImageProcessorC2Ev [66]
+[94]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN14ImageProcessorC2Ev [94]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [231]
-[67]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN6CameraC2Ev [67]
+[95]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN6CameraC2Ev [95]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [231]
-[68]     0.0    0.00    0.00       1         _GLOBAL__sub_I_x_counter [68]
+[96]     0.0    0.00    0.00       1         _GLOBAL__sub_I_x_counter [96]
 -----------------------------------------------
-                0.00    0.00       1/1           RectangleTracker::AddRectangle(cv::Rect_<int>&) [74]
-[69]     0.0    0.00    0.00       1         PointTracker::AddPoint(cv::Point_<int>&, cv::Rect_<int>&) [69]
-                0.00    0.00       1/1           TrackedObject::TrackedObject(cv::Point_<int>, cv::Rect_<int>, unsigned int, bool) [72]
-                0.00    0.00       1/1           std::_Rb_tree_iterator<std::pair<int const, TrackedObject> > std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<int&&>, std::tuple<> >(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, std::piecewise_construct_t const&, std::tuple<int&&>&&, std::tuple<>&&) [80]
+                0.00    0.00       1/1           ObjectTracker::ObjectTracker(unsigned int, double, cv::Rect_<int>) [137]
+[97]     0.0    0.00    0.00       1         ObjectCounter::ObjectCounter(cv::Rect_<int>) [97]
+                0.00    0.00       1/8           Config::Config() [76]
+                0.00    0.00       1/1           Config::GetLeftCounter() [100]
+                0.00    0.00       1/1           Config::GetRightCounter() [101]
+                0.00    0.00       1/8           Config::~Config() [77]
 -----------------------------------------------
-                0.00    0.00       1/1           ObjectTracker::ObjectTracker(unsigned int, double, cv::Rect_<int>) [127]
-[70]     0.0    0.00    0.00       1         ObjectCounter::ObjectCounter(cv::Rect_<int>) [70]
-                0.00    0.00       1/2           Config::Config() [55]
-                0.00    0.00       1/1           Config::GetLeftCounter() [76]
-                0.00    0.00       1/1           Config::GetRightCounter() [77]
-                0.00    0.00       1/2           Config::~Config() [56]
+                0.00    0.00       1/1           ObjectTracker::ObjectTracker(unsigned int, double, cv::Rect_<int>) [137]
+[98]     0.0    0.00    0.00       1         ObjectLocator::ObjectLocator(double) [98]
 -----------------------------------------------
-                0.00    0.00       1/1           ObjectTracker::ObjectTracker(unsigned int, double, cv::Rect_<int>) [127]
-[71]     0.0    0.00    0.00       1         ObjectLocator::ObjectLocator(double) [71]
+                0.00    0.00       1/1           ObjectTracker::CreateNewTracker() [10]
+[99]     0.0    0.00    0.00       1         RectangleTracker::RectangleTracker(unsigned int) [99]
 -----------------------------------------------
-                0.00    0.00       1/1           PointTracker::AddPoint(cv::Point_<int>&, cv::Rect_<int>&) [69]
-[72]     0.0    0.00    0.00       1         TrackedObject::TrackedObject(cv::Point_<int>, cv::Rect_<int>, unsigned int, bool) [72]
+                0.00    0.00       1/1           ObjectCounter::ObjectCounter(cv::Rect_<int>) [97]
+[100]    0.0    0.00    0.00       1         Config::GetLeftCounter() [100]
 -----------------------------------------------
-                0.00    0.00       1/1           std::_Rb_tree_iterator<std::pair<int const, TrackedObject> > std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<int&&>, std::tuple<> >(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, std::piecewise_construct_t const&, std::tuple<int&&>&&, std::tuple<>&&) [80]
-[73]     0.0    0.00    0.00       1         TrackedObject::TrackedObject() [73]
------------------------------------------------
-                0.00    0.00       1/1           ObjectTracker::AddRectanglesToTracker(cv::Mat&, cv::Mat&) [43]
-[74]     0.0    0.00    0.00       1         RectangleTracker::AddRectangle(cv::Rect_<int>&) [74]
-                0.00    0.00       1/1           PointTracker::AddPoint(cv::Point_<int>&, cv::Rect_<int>&) [69]
------------------------------------------------
-                0.00    0.00       1/1           ObjectTracker::CreateNewTracker() [41]
-[75]     0.0    0.00    0.00       1         RectangleTracker::RectangleTracker(unsigned int) [75]
------------------------------------------------
-                0.00    0.00       1/1           ObjectCounter::ObjectCounter(cv::Rect_<int>) [70]
-[76]     0.0    0.00    0.00       1         Config::GetLeftCounter() [76]
------------------------------------------------
-                0.00    0.00       1/1           ObjectCounter::ObjectCounter(cv::Rect_<int>) [70]
-[77]     0.0    0.00    0.00       1         Config::GetRightCounter() [77]
------------------------------------------------
-                0.00    0.00       1/1           ObjectLocator::GetBoundingBoxFromContour(std::vector<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > >, std::allocator<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > > > >) [40]
-[78]     0.0    0.00    0.00       1         void std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_emplace_back_aux<cv::Rect_<int> const&>(cv::Rect_<int> const&) [78]
------------------------------------------------
-                0.00    0.00       1/1           std::_Rb_tree_iterator<std::pair<int const, TrackedObject> > std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<int&&>, std::tuple<> >(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, std::piecewise_construct_t const&, std::tuple<int&&>&&, std::tuple<>&&) [80]
-[79]     0.0    0.00    0.00       1         std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_insert_node(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [79]
------------------------------------------------
-                0.00    0.00       1/1           PointTracker::AddPoint(cv::Point_<int>&, cv::Rect_<int>&) [69]
-[80]     0.0    0.00    0.00       1         std::_Rb_tree_iterator<std::pair<int const, TrackedObject> > std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<int&&>, std::tuple<> >(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, std::piecewise_construct_t const&, std::tuple<int&&>&&, std::tuple<>&&) [80]
-                0.00    0.00       1/1           TrackedObject::TrackedObject() [73]
-                0.00    0.00       1/1           std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, int const&) [82]
-                0.00    0.00       1/1           std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_insert_node(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*) [79]
------------------------------------------------
-                0.00    0.00       1/1           std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, int const&) [82]
-[81]     0.0    0.00    0.00       1         std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_unique_pos(int const&) [81]
------------------------------------------------
-                0.00    0.00       1/1           std::_Rb_tree_iterator<std::pair<int const, TrackedObject> > std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<int&&>, std::tuple<> >(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, std::piecewise_construct_t const&, std::tuple<int&&>&&, std::tuple<>&&) [80]
-[82]     0.0    0.00    0.00       1         std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, int const&) [82]
-                0.00    0.00       1/1           std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_unique_pos(int const&) [81]
+                0.00    0.00       1/1           ObjectCounter::ObjectCounter(cv::Rect_<int>) [97]
+[101]    0.0    0.00    0.00       1         Config::GetRightCounter() [101]
 -----------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
@@ -371,20 +464,26 @@ notice and this notice are preserved.
 
 Index by function name
 
-  [57] _GLOBAL__sub_I__Z10IsMidnightv (Utils.cpp) [35] ObjectCounter::GetTotalPoints() [52] Config::GetCropPos(unsigned int)
-  [58] _GLOBAL__sub_I__Z18RetrieveSensorDataPKcP10SensorData (Sensors.cpp) [38] ObjectCounter::SetReferenceBox(cv::Rect_<int>) [53] Config::GetCounterPos(unsigned int)
-  [59] _GLOBAL__sub_I__ZN11VideoOutputC2EPKc (VideoOutput.cpp) [70] ObjectCounter::ObjectCounter(cv::Rect_<int>) [54] Config::GetInterestPos(unsigned int)
-  [60] _GLOBAL__sub_I__ZN12PointTracker19DistanceInThresholdERN2cv6Point_IiEES3_ (PointTracker.cpp) [39] ObjectLocator::DetectObjects(cv::Mat&) [76] Config::GetLeftCounter()
-  [61] _GLOBAL__sub_I__ZN13ObjectCounterC2EN2cv5Rect_IiEE (ObjectCounter.cpp) [40] ObjectLocator::GetBoundingBoxFromContour(std::vector<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > >, std::allocator<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > > > >) [77] Config::GetRightCounter()
-  [62] _GLOBAL__sub_I__ZN13ObjectLocatorC2Ed (ObjectLocator.cpp) [71] ObjectLocator::ObjectLocator(double) [50] Config::GetPerspectivePos(unsigned int)
-  [63] _GLOBAL__sub_I__ZN13ObjectTrackerC2EjdN2cv5Rect_IiEE (ObjectTracker.cpp) [41] ObjectTracker::CreateNewTracker() [55] Config::Config()
-  [64] _GLOBAL__sub_I__ZN13TrackedObjectC2Ev (TrackedObject.cpp) [42] ObjectTracker::AccountNewObjects(cv::Mat&) [56] Config::~Config()
-  [65] _GLOBAL__sub_I__ZN14CoordTransformC2Ev (CoordTransform.cpp) [43] ObjectTracker::AddRectanglesToTracker(cv::Mat&, cv::Mat&) [78] void std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_emplace_back_aux<cv::Rect_<int> const&>(cv::Rect_<int> const&)
-  [66] _GLOBAL__sub_I__ZN14ImageProcessorC2Ev (ImageProcessor.cpp) [44] ObjectTracker::GetTotal() [79] std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_insert_node(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*)
-  [67] _GLOBAL__sub_I__ZN6CameraC2Ev (Camera.cpp) [72] TrackedObject::TrackedObject(cv::Point_<int>, cv::Rect_<int>, unsigned int, bool) [80] std::_Rb_tree_iterator<std::pair<int const, TrackedObject> > std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<int&&>, std::tuple<> >(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, std::piecewise_construct_t const&, std::tuple<int&&>&&, std::tuple<>&&)
-  [68] _GLOBAL__sub_I_x_counter (CycloTracker.cpp) [73] TrackedObject::TrackedObject() [81] std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_unique_pos(int const&)
-  [33] Print(char const*, cv::Point_<int>, cv::Mat&, unsigned int, unsigned int) [45] ImageProcessor::PerspectiveTransform(cv::Mat&, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>) [82] std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, int const&)
-  [69] PointTracker::AddPoint(cv::Point_<int>&, cv::Rect_<int>&) [46] ImageProcessor::CropImage(cv::Mat&, cv::Rect_<int>) [51] std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_copy(std::_Rb_tree_node<std::pair<int const, TrackedObject> > const*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*)
-  [47] PointTracker::PointTracker(unsigned int, PointTracker) [74] RectangleTracker::AddRectangle(cv::Rect_<int>&) [34] std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_erase(std::_Rb_tree_node<std::pair<int const, TrackedObject> >*)
-  [36] ObjectCounter::GetLTRPoints() [48] RectangleTracker::RectangleTracker(unsigned int, PointTracker) [49] std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::operator=(std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > > const&)
-  [37] ObjectCounter::GetRTLPoints() [75] RectangleTracker::RectangleTracker(unsigned int)
+  [85] _GLOBAL__sub_I__Z10IsMidnightv (Utils.cpp) [97] ObjectCounter::ObjectCounter(cv::Rect_<int>) [16] cv::Mat::operator=(cv::Mat const&)
+  [86] _GLOBAL__sub_I__Z18RetrieveSensorDataPKcP10SensorData (Sensors.cpp) [9] ObjectLocator::DetectObjects(cv::Mat&) [81] Config::GetCropPos(unsigned int)
+  [87] _GLOBAL__sub_I__ZN11VideoOutputC2EPKc (VideoOutput.cpp) [17] ObjectLocator::GetBoundingBoxFromContour(std::vector<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > >, std::allocator<std::vector<cv::Point_<int>, std::allocator<cv::Point_<int> > > > >) [82] Config::GetCounterPos(unsigned int)
+  [88] _GLOBAL__sub_I__ZN12PointTracker19DistanceInThresholdERN2cv6Point_IiEES3_ (PointTracker.cpp) [98] ObjectLocator::ObjectLocator(double) [83] Config::GetInterestPos(unsigned int)
+  [89] _GLOBAL__sub_I__ZN13ObjectCounterC2EN2cv5Rect_IiEE (ObjectCounter.cpp) [11] ObjectTracker::PrintTotal(cv::Mat&) [100] Config::GetLeftCounter()
+  [90] _GLOBAL__sub_I__ZN13ObjectLocatorC2Ed (ObjectLocator.cpp) [78] ObjectTracker::PersistImage(cv::Mat&) [84] Config::SetLeftCounter(unsigned int)
+  [91] _GLOBAL__sub_I__ZN13ObjectTrackerC2EjdN2cv5Rect_IiEE (ObjectTracker.cpp) [34] ObjectTracker::SetInterestArea(cv::Rect_<int>) [101] Config::GetRightCounter()
+  [92] _GLOBAL__sub_I__ZN13TrackedObjectC2Ev (TrackedObject.cpp) [10] ObjectTracker::CreateNewTracker() [79] Config::SetRightCounter(unsigned int)
+  [93] _GLOBAL__sub_I__ZN14CoordTransformC2Ev (CoordTransform.cpp) [26] ObjectTracker::AccountNewObjects(cv::Mat&) [80] Config::GetPerspectivePos(unsigned int)
+  [94] _GLOBAL__sub_I__ZN14ImageProcessorC2Ev (ImageProcessor.cpp) [19] ObjectTracker::PrintRightPartial(cv::Mat&, cv::Point_<int>) [76] Config::Config()
+  [95] _GLOBAL__sub_I__ZN6CameraC2Ev (Camera.cpp) [6] ObjectTracker::AddRectanglesToTracker(cv::Mat&, cv::Mat&) [77] Config::~Config()
+  [96] _GLOBAL__sub_I_x_counter (CycloTracker.cpp) [20] ObjectTracker::GetTotal() [29] void std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_emplace_back_aux<cv::Rect_<int> const&>(cv::Rect_<int> const&)
+  [30] IsMidnight()           [75] TrackedObject::TrackedObject(cv::Point_<int>, cv::Rect_<int>, unsigned int, bool) [73] std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_insert_node(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*)
+   [8] ProvideOsd(cv::Mat&, SensorData*, ObjectTracker&) [72] TrackedObject::TrackedObject() [27] std::_Rb_tree_iterator<std::pair<int const, TrackedObject> > std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<int&&>, std::tuple<> >(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, std::piecewise_construct_t const&, std::tuple<int&&>&&, std::tuple<>&&)
+  [12] ProvidePip(cv::Mat&, cv::Mat&) [5] ImageProcessor::PrepareFrame(cv::Mat&, cv::Rect_<int>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>) [33] std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_unique_pos(int const&)
+  [22] Print(char const*, cv::Point_<int>, cv::Mat&, unsigned int, unsigned int) [14] ImageProcessor::AcquireForeground(cv::Mat&) [28] std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_get_insert_hint_unique_pos(std::_Rb_tree_const_iterator<std::pair<int const, TrackedObject> >, int const&)
+  [24] PointTracker::AddPoint(cv::Point_<int>&, cv::Rect_<int>&) [31] ImageProcessor::InsertInterestArea(cv::Mat&, cv::Rect_<int>) [71] std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_copy(std::_Rb_tree_node<std::pair<int const, TrackedObject> > const*, std::_Rb_tree_node<std::pair<int const, TrackedObject> >*)
+  [15] PointTracker::PointTracker(unsigned int, PointTracker) [7] ImageProcessor::PerspectiveTransform(cv::Mat&, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>, cv::Point_<float>) [32] std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::_M_erase(std::_Rb_tree_node<std::pair<int const, TrackedObject> >*)
+  [74] ObjectCounter::AccountPoint(TrackedObject) [18] ImageProcessor::CropImage(cv::Mat&, cv::Rect_<int>) [21] std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > >::operator=(std::_Rb_tree<int, std::pair<int const, TrackedObject>, std::_Select1st<std::pair<int const, TrackedObject> >, std::less<int>, std::allocator<std::pair<int const, TrackedObject> > > const&)
+  [68] ObjectCounter::GetLTRPoints() [25] RectangleTracker::AddRectangle(cv::Rect_<int>&) [2] __gcov_indirect_call_profiler_v2
+  [69] ObjectCounter::GetRTLPoints() [13] RectangleTracker::RectangleTracker(unsigned int, PointTracker) [35] __gcov_read_counter
+  [23] ObjectCounter::GetTotalPoints() [99] RectangleTracker::RectangleTracker(unsigned int) [3] __gcov_time_profiler
+  [70] ObjectCounter::SetReferenceBox(cv::Rect_<int>) [1] cv::Mat::~Mat()
