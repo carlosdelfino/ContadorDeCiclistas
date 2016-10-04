@@ -33,24 +33,19 @@
         <section id="main_content">
           <h2>
 <a id="contador-de-ciclista" class="anchor" href="#contador-de-ciclista" aria-hidden="true">
-<span aria-hidden="true" class="octicon octicon-link"></span></a>Passo a Passo diário para port do projeto para ARM Cortex-53</h2>
+<span aria-hidden="true" class="octicon octicon-link"></span></a>Profiling de Cada Plataforma</h2>
 
-<p>Conforme pode ser visto no repositório, clique no botão acima para ver no 
-github, criei um branch de nome <b>NanoPI-M3</b> onde os teses atuais estão 
-sendo feitos.</p>
-<p>No estágio atual o branch já pode ser unificado com o master, pois existem
-targets especificas para cada compilação, podendo assim gerar código para cada
-plataforma Intel ou ARM Cortex-A53, porém se estiver compilando através de 
-cross-compiler é preciso usar as variáveis para indicar o compilador.<p>
-<p>No próprio NanoPI-M3 não precisa informar qual compilador usar, se estiver
-no linux em uma plataforma intel use:</p>
-<pre>
-make CROSS_COMPILE=arm-linux- CONFIG_CROSS_COMPILE=arm-linux- targetcompilacao
-<pre> 
+<p>Se você está portando este código para outra plataforma e está fazendo o profiling de suas alterações
+que compartilha-las com a comunidade.</p>
 
-<p> Hoje dia 03 de outubro de 2016, resolvi as pendências para que o profile do código
-funcionasse, a documentação sobre o assunto está disponível na página <a href="profiling.html">
-"Profiling"</a></p>
+<p> Eu criei uma pasta no repositório chamada <a href="https://github.com/carlosdelfino/ContadorDeCiclistas/tree/NanoPI-M3/profiling">""profiling"</a>, para vela clique no link e veja detalhes no arquivo Readme.md.
+
+<p> Para cada plataforma haverá um diretório com pelo menos um arquivo Readme.md com instruções de ocmo efetuar o profiling.</p>
+
+<p>Por hora eu tenho trabalho na plataforma NanoPI M3, em breve irei levar a experiência para o RaspberryPI, apesar que achar o NanoPI muito superior e muito adequado a este projeto, mas pretendo fazerum pequeno comparativo de desempenho.
+O NanoPI M3, usa um Cortex-A53 que tem um excelente desempenho. São 8 cores rodando entre 400MHz e 1.4GHz.</p>
+
+
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ifBOIyaRGy8" frameborder="0" allowfullscreen></iframe>
         </section>
