@@ -1,0 +1,8 @@
+*.swp
+*.out
+*.orig
+*.log
+*.gcno
+*.gcda
+*.gcov
+gmon.out
