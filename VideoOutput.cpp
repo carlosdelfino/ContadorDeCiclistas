@@ -13,31 +13,38 @@
 VideoOutput::VideoOutput(const char *outputDevice) {
 	unsigned int outputSize = strlen(outputDevice);
 	this->outputDevice = new char[outputSize];
+
 	sprintf(this->outputDevice, "%s", outputDevice);
 	printf("File: %s", this->outputDevice);
-	
-	if( (this->fdrw = open(this->outputDevice, O_RDWR)) < 0) {
-		perror("The following error occurred");
-		std::cout << std::endl;
-		exit(EXIT_FAILURE);
-	}
-	
-	this->format_properties(&(this->vid_format));
-	if( ioctl(this->fdrw, VIDIOC_S_FMT, &vid_format) < 0) {
-		int errno2 = errno;
-		perror("The following error occurred");
-		std::cout << std::endl;
-		if(errno2 == ENOTTY)
-			std::cout << "Probably " << outputDevice << " is not " <<
-			"a video streaming device." << std::endl;
-		exit(EXIT_FAILURE);
-	}
 }
 		
 VideoOutput::~VideoOutput() {
 	if (this->fdrw >= 0) {
 		close(this->fdrw);
 	}
+}
+
+bool VideoOutput::isOpen(){
+	if(!open){
+		if( (this->fdrw = open(this->outputDevice, O_RDWR)) < 0) {
+			perror("The following error occurred");
+			std::cout << std::endl;
+			return false;
+		}
+
+		this->format_properties(&(this->vid_format));
+		if( ioctl(this->fdrw, VIDIOC_S_FMT, &vid_format) < 0) {
+			int errno2 = errno;
+			perror("The following error occurred");
+			std::cout << std::endl;
+			if(errno2 == ENOTTY)
+				std::cout << "Probably " << outputDevice << " is not " <<
+				"a video streaming device." << std::endl;
+			return false;
+		}
+		this->open = true;
+	}
+	return this->open;
 }
 		
 void VideoOutput::print_format(struct v4l2_format* vid_format) {

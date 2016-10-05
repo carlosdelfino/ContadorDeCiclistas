@@ -15,10 +15,14 @@ private:
 	int fdrw;
 	char *outputDevice;		
 	struct v4l2_format vid_format;
+	bool open = false;
 public:
 	VideoOutput(const char *outputevice);
 	~VideoOutput();
 		
+	bool isOpen();
+
+	void getError();
 	void print_format(struct v4l2_format* vid_format);
 	void format_properties(struct v4l2_format* vid_format);		
 	void write(cv::Mat &frame);
