@@ -10,14 +10,15 @@
     },
     "crop":
     {
-    	"window":{
-			"dist_x": 10,
-			"dist_y": 60
-		},
+        "window":
+        {
+            "dist_x": "20",
+            "dist_y": "100"
+        },
         "left_x": "0",
         "left_y": "0",
         "right_x": "640",
-        "right_y": "480" 
+        "right_y": "480"
     },
     "interest":
     {
@@ -42,5 +43,6 @@
             "right_x": "640",
             "right_y": "480"
         }
-    }
+    },
+    "address": "Av. Carapinina, 1000"
 }
