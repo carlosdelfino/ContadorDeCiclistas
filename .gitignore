@@ -20,3 +20,4 @@ gdb_cmds
 /cppcomplete.tags
 /Makefile.new
 /Makefile.sugestion
+/CycloTracker.conf

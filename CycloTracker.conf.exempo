@@ -1,0 +1,46 @@
+{
+    "counter":
+    {
+        "left": "204",
+        "right": "290",
+        "left_x": "50",
+        "left_y": "350",
+        "right_x": "500",
+        "right_y": "350"
+    },
+    "crop":
+    {
+    	"window":{
+			"dist_x": 10,
+			"dist_y": 60
+		},
+        "left_x": "0",
+        "left_y": "0",
+        "right_x": "640",
+        "right_y": "480" 
+    },
+    "interest":
+    {
+        "start_x": "0",
+        "start_y": "0",
+        "end_x": "640",
+        "end_y": "480"
+    },
+    "perspective":
+    {
+        "superior":
+        {
+            "left_x": "0",
+            "left_y": "0",
+            "right_x": "640",
+            "right_y": "0"
+        },
+        "inferior":
+        {
+            "left_x": "0",
+            "left_y": "480",
+            "right_x": "640",
+            "right_y": "480"
+        }
+    }
+}
