@@ -64,20 +64,26 @@ void Print(const char *message, cv::Point position, cv::Mat &frame,
 }
 
 void ProvidePip(cv::Mat &frame, cv::Mat &dst) {
+	CycloConfig &config = CycloConfig::get();
+	const int pip_x_limit = config.getCropWindowPosX();
+	const int pip_y_limit = config.getCropWindowPosX();
+
 	cv::Size size = frame.size();
 	cv::Size pip1Size(std::min(400, size.width), std::min(200, size.height));
 
 	cv::Size dstSize = dst.size();
-	cv::Rect pip1Rect(cv::Point(dstSize.width - pip1Size.width - 20, 20),
-			pip1Size);
+	int pip_x = dstSize.width - pip1Size.width - pip_x_limit;
+
+
+	cv::Rect pip1Rect(cv::Point(pip_x, pip_y_limit), pip1Size);
 
 	cv::Mat pip1;
 	cv::resize(frame, pip1, pip1Size);
 
-	std::cout << "** passei **" << std::endl;
-	std::cout.flush();
 	cv::rectangle(dst, pip1Rect, cv::Scalar(0, 0, 255), 5);
-	pip1.copyTo(dst(pip1Rect));
+
+	cv::Mat dst0 = dst(pip1Rect);
+	pip1.copyTo(dst0);
 }
 
 void ProvideOsd(cv::Mat &frame, SensorData *sd, ObjectTracker &ot) {

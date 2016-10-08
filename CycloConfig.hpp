@@ -17,6 +17,8 @@
 #define PROP_COUNTER_LEFT_Y  "counter.left_y"
 #define PROP_COUNTER_RIGHT_Y  "counter.right_y"
 
+#define PROP_CROP_WINDOW_X  "crop.window.dist_x"
+#define PROP_CROP_WINDOW_Y  "crop.window.dist_y"
 #define PROP_CROP_LEFT_X  "crop.left_x"
 #define PROP_CROP_LEFT_Y  "crop.left_y"
 #define PROP_CROP_RIGHT_X  "crop.right_x"
@@ -41,20 +43,24 @@
 #define POINT_RIGHT_INFERIOR_COORNER_Y 480
 
 typedef struct {
-	unsigned int left_counter = 50;
-	unsigned int right_counter = 100;
+	unsigned int left_counter = 0;
+	unsigned int right_counter = 0;
 
-	int x_counter[2] = { 10, 200 };
-	int y_counter[2] = { 10, 10 };
+	unsigned int x_counter[2] = { 50, 500 };
+	unsigned int y_counter[2] = { 350, 350 };
 
-	int x[4] = { 0, 640, 0, 640 };
-	int y[4] = { 0, 0, 480, 480 };
+	unsigned int x[4] = { 0, 640, 0, 640 };
+	unsigned int y[4] = { 0, 0, 480, 480 };
 
-	int x_crop[2] = { 10, 300 };
-	int y_crop[2] = { 10, 300 };
 
-	int x_interest[2] = { 20, 200 };
-	int y_interest[2] = { 20, 200 };
+	unsigned int x_crop_windowPos = 10;
+	unsigned int y_crop_windowPos = 60;
+
+	unsigned int x_crop[2] = { 0, 640 };
+	unsigned int y_crop[2] = { 0, 480 };
+
+	unsigned int x_interest[2] = { 0, 640 };
+	unsigned int y_interest[2] = { 0, 480 };
 
 	std::string address = "Av. Carapinina, 1000";
 
@@ -148,6 +154,8 @@ public:
 	void SetInterestPos(unsigned int index, cv::Point pt);
 	void SetInterestPos(unsigned int index, int x, int y);
 
+	unsigned int getCropWindowPosX();
+	unsigned int getCropWindowPosY();
 	unsigned long countInteraction();
 };
 

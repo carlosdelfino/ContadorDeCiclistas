@@ -359,6 +359,14 @@ void CycloConfig::setAddress(std::string a) {
 	this->data.address = a;
 }
 
-unsigned long CycloConfig::countInteraction(){
-return ++interaction;
+unsigned int CycloConfig::getCropWindowPosX() {
+	return data.x_crop_windowPos;
+}
+unsigned int CycloConfig::getCropWindowPosY() {
+	return data.y_crop_windowPos;
+
+}
+
+unsigned long CycloConfig::countInteraction() {
+	return ++interaction;
 }

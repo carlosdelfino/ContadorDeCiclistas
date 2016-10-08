@@ -230,7 +230,7 @@ int main(int argc, char **argv) {
 	if (debug)
 		std::cout
 				<< boost::format(
-						"** Janela de Interesse: (%d,%d), largura: %d, comprimento: %d")
+						"** Janela de Interesse: (%d,%d), largura: %d, altura: %d")
 						% config.getInterestX(0) % config.getInterestY(0)
 						% config.getInterestWidth() % config.getInterestHeight()
 				<< std::endl;
@@ -268,7 +268,7 @@ int main(int argc, char **argv) {
 	if (debug)
 		std::cout
 				<< boost::format(
-						"** Janela de Corte: (%d,%d), largura: %d, comprimento: %d")
+						"** Janela de Corte: (%d,%d), comprimento: %d, altura: %d")
 						% config.getCropX(0) % config.getCropY(0)
 						% config.getCropWidth() % config.getCropHeight()
 				<< std::endl;
@@ -286,29 +286,23 @@ int main(int argc, char **argv) {
 		if (outputFile)
 			outputFile->write(frame); //Write avi file
 
-		ip.PrepareFrame(frame, cropFrame, p0, p1, p2, p3);
+		cv::Mat full = frame.clone();
 
+		ip.PrepareFrame(frame, cropFrame, p0, p1, p2, p3);
 		fore = ip.AcquireForeground(frame);
 		ip.InsertInterestArea(frame, interestArea);
 		ot.IterateTracker(frame, fore);
 
-		cv::Mat full = frame.clone();
 		ot.PrintTotal(full);
 		ot.PrintLeftPartial(full, lCounter);
 		ot.PrintRightPartial(full, rCounter);
 
 		ProvideOsd(full, sd, ot);
-		std::cout << "** passei **" << debug++ << std::endl;
-		std::cout.flush();
 		ProvidePip(frame, full);
 
-		std::cout << "** passei **" << debug++ << std::endl;
-		std::cout.flush();
 		cv::imshow(config.getAddress(), frame);
 		cv::imshow("Full Frame", full);
 
-		std::cout << "** passei **" << debug++ << std::endl;
-		std::cout.flush();
 		if (outputDevice)
 			outputDevice->write(full);
 
@@ -317,7 +311,7 @@ int main(int argc, char **argv) {
 		}
 
 		config.countInteraction();
-	} while (char(cv::waitKey(30)) == char(27));
+	} while (char(cv::waitKey(30)) != char(27));
 
 	if (!sensor_device.empty()) {
 		sensorsThread->join();
@@ -329,7 +323,6 @@ int main(int argc, char **argv) {
 	if (outputFile)
 		delete outputFile;
 
-	config.~CycloConfig();
 	exit(0);
 	return 0;
 }
