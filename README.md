@@ -14,6 +14,7 @@ Requisitos
 - GCC 4.9 (GNU-Linux-EABI)
 - OpenCv 2.4
 - V4l2Loopback
+- boost-program-options e dependências
 - WebCam (qualquer de R$ 20,00)
 
 Como Usar

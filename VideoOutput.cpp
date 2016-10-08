@@ -24,8 +24,8 @@ VideoOutput::~VideoOutput() {
 	}
 }
 
-bool VideoOutput::isOpen(){
-	if(!open){
+bool VideoOutput::isOpened(){
+	if(!this->isopen){
 		if( (this->fdrw = open(this->outputDevice, O_RDWR)) < 0) {
 			perror("The following error occurred");
 			std::cout << std::endl;
@@ -42,9 +42,9 @@ bool VideoOutput::isOpen(){
 				"a video streaming device." << std::endl;
 			return false;
 		}
-		this->open = true;
+		this->isopen = true;
 	}
-	return this->open;
+	return this->isopen;
 }
 		
 void VideoOutput::print_format(struct v4l2_format* vid_format) {

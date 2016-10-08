@@ -8,6 +8,8 @@ DISTDIR=./bin/
 BIN=CycloTracker
 
 OBJ=CycloTracker.o \
+	CycloConfig.o \
+	InteractionHandler.o \
 	VideoOutput.o \
 	ImageProcessor.o \
 	ObjectCounter.o \
@@ -48,16 +50,6 @@ LDFLAGS=-lm \
 	   `pkg-config --libs opencv` \
 	   -lpthread
 
-ARM_CFLAGS=-mtune=cortex-a53 \
-		-mcpu=cortex-a53 \
-		-mfpu=neon \
-		-mfloat-abi=hard \
-		-march=armv8-a+crc
-
-nanopi-m3: CFLAGS+=$(ARM_CFLAGS)
-nanopi-m3: LDFLAGS+=$(ARM_CFLAGS)
-nanopi-m3: all
-
 all:$(OBJ)
 	@mkdir -p $(DISTDIR)
 	@mkdir -p tmp
@@ -71,6 +63,16 @@ clean:
 	@echo CCXX $< -o $@ $(CFLAGS)
 	@g++ -c $< -o $@ $(CFLAGS) 
 
+ARM_CFLAGS=-mtune=cortex-a53 \
+		-mcpu=cortex-a53 \
+		-mfpu=neon \
+		-mfloat-abi=hard \
+		-march=armv8-a+crc
+
+nanopi-m3: CFLAGS+=$(ARM_CFLAGS)
+nanopi-m3: LDFLAGS+=$(ARM_CFLAGS)
+nanopi-m3: all
+
 PGO_FLAGS_1=-pg -fprofile-generate --coverage
 PGO_FLAGS_2=-fprofile-correction -fprofile-use
 
@@ -82,7 +84,6 @@ pgo-secondpass: CFLAGS+=$(PGO_FLAGS_2)
 pgo-secondpass: LDFLAGS+=$(PGO_FLAGS_2)
 pgo-secondpass: clean all
 
-
 pgo-nanopi-m3-firstpass: CFLAGS+=$(PGO_FLAGS_1)
 pgo-nanopi-m3-firstpass: LDFLAGS+=$(PGO_FLAGS_1)
 pgo-nanopi-m3-firstpass: clean  nanopi-m3
@@ -92,8 +93,10 @@ pgo-nanopi-m3-secondpass: LDFLAGS+=$(PGO_FLAGS_2)
 pgo-nanopi-m3-secondpass: clean  nanopi-m3
 	
 PGO_EXT=gcda gcno gcov 
+
 distclean: clean
 	$(foreach ext,$(PGO_EXT), rm -f *.$(ext);)
 	rm -rf  gmon.out
 
-
+confclean: 
+	rm -rf CycloTracker.conf

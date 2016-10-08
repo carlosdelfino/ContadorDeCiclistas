@@ -1,12 +1,13 @@
 #include "ObjectCounter.hpp"
+#include "CycloConfig.hpp"
 #include "Utils.hpp"
 
 ObjectCounter::ObjectCounter(cv::Rect referenceBox) {
-	Config configuration;
+	CycloConfig config = CycloConfig::get();
 	memset(this->countedPoint, -1, sizeof(this->countedPoint));
 	this->pos = 0;
-	this->totalLeftCount = configuration.GetLeftCounter();
-	this->totalRightCount = configuration.GetRightCounter();
+	this->totalLeftCount = config.GetLeftCounter();
+	this->totalRightCount = config.GetRightCounter();
 	this->referenceBox = referenceBox;	
 }
 
@@ -32,15 +33,15 @@ bool ObjectCounter::AccountPoint(TrackedObject point) {
 			point.pt.x < this->referenceBox.br().x &&
 			point.pt.y > this->referenceBox.tl().y &&
 			point.pt.y < this->referenceBox.br().y) {
-			Config configuration;
+			CycloConfig config = CycloConfig::get();
 			
 			if (point.ltr) {
 				this->totalLeftCount++;
-				configuration.SetLeftCounter(this->totalLeftCount);
+				config.SetLeftCounter(this->totalLeftCount);
 			}
 			else {
 				this->totalRightCount++;
-				configuration.SetRightCounter(this->totalRightCount);
+				config.SetRightCounter(this->totalRightCount);
 			}
 			
 			this->countedPoint[pos++] = point.id;
@@ -67,13 +68,13 @@ unsigned int ObjectCounter::GetRTLPoints() {
 }
 
 void ObjectCounter::ZeroCounters() {
-	Config configuration;
+	CycloConfig config = CycloConfig::get();
 	
 	this->totalLeftCount = 0;
 	this->totalRightCount = 0;
 	
-	configuration.SetLeftCounter(this->totalLeftCount);
-	configuration.SetLeftCounter(this->totalRightCount);
+	config.SetLeftCounter(this->totalLeftCount);
+	config.SetLeftCounter(this->totalRightCount);
 }
 
 void ObjectCounter::SetReferenceBox(cv::Rect referenceBox) {

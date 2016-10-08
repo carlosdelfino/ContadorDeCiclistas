@@ -1,4 +1,8 @@
 #include "Utils.hpp"
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <string.h>
 #include <sys/timeb.h>
 
 bool IsMidnight() {

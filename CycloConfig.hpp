@@ -10,93 +10,115 @@
 
 #include<opencv2/opencv.hpp>
 
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <string.h>
+#define PROP_COUNTER_LEFT  "counter.left"
+#define PROP_COUNTER_RIGHT  "counter.right"
+#define PROP_COUNTER_LEFT_X  "counter.left_x"
+#define PROP_COUNTER_RIGHT_X  "counter.right_x"
+#define PROP_COUNTER_LEFT_Y  "counter.left_y"
+#define PROP_COUNTER_RIGHT_Y  "counter.right_y"
+
+#define PROP_CROP_LEFT_X  "crop.left_x"
+#define PROP_CROP_LEFT_Y  "crop.left_y"
+#define PROP_CROP_RIGHT_X  "crop.right_x"
+#define PROP_CROP_RIGHT_Y  "crop.right_y"
+
+#define PROP_PERSPECTIVE_SUPERIOR_LEFT_X "perspective.superior.left_x"
+#define PROP_PERSPECTIVE_SUPERIOR_LEFT_Y "perspective.superior.left_y"
+#define PROP_PERSPECTIVE_SUPERIOR_RIGHT_X "perspective.superior.right_x"
+#define PROP_PERSPECTIVE_SUPERIOR_RIGHT_Y "perspective.superior.right_y"
+#define PROP_PERSPECTIVE_INFERIOR_LEFT_X "perspective.inferior.left_x"
+#define PROP_PERSPECTIVE_INFERIOR_LEFT_Y "perspective.inferior.left_y"
+#define PROP_PERSPECTIVE_INFERIOR_RIGHT_X "perspective.inferior.right_x"
+#define PROP_PERSPECTIVE_INFERIOR_RIGHT_Y "perspective.inferior.right_y"
+
+#define POINT_LEFT_SUPERIOR_COORNER_X 0
+#define POINT_LEFT_SUPERIOR_COORNER_Y 0
+#define POINT_RIGHT_SUPERIOR_COORNER_X 640
+#define POINT_RIGHT_SUPERIOR_COORNER_Y 0
+#define POINT_LEFT_INFERIOR_COORNER_X 0
+#define POINT_LEFT_INFERIOR_COORNER_Y 480
+#define POINT_RIGHT_INFERIOR_COORNER_X 640
+#define POINT_RIGHT_INFERIOR_COORNER_Y 480
 
 typedef struct {
-	unsigned int left_counter;
-	unsigned int right_counter;
+	unsigned int left_counter = 50;
+	unsigned int right_counter = 100;
 
-	int x_counter[2];
-	int y_counter[2];
+	int x_counter[2] = {10, 200};
+	int y_counter[2] = {10, 10};
 
-	int x[4];
-	int y[4];
+	int x[4] = {0, 640,   0, 640};
+	int y[4] = {0,   0, 480, 480};
 
-	int x_crop[2];
-	int y_crop[2];
+	int x_crop[2] = {10, 300};
+	int y_crop[2] = {10, 300};
 
-	int x_interest[2];
-	int y_interest[2];
+	int x_interest[2] = { 20, 200};
+	int y_interest[2] = { 20, 200};
 
-} ConfigData;
+	std::string address = "Av. Carapinina, 1000";
+
+}ConfigData;
 
 class CycloConfig {
 private:
-	const char *configFile = ".data";
+	const char *configFile = "CycloTracker.conf";
 	ConfigData data;
 
-	static CycloConfig* instance;
 	CycloConfig();
-	CycloConfig(CycloConfig const&);              // Don't Implement
-	void operator=(CycloConfig const&); // Don't implement
 
 public:
 	virtual ~CycloConfig();
 
-	static CycloConfig* get();
+	void PersistData();
+	void LoadData();
+
+	static CycloConfig& get();
 
 	void setFrameSize(cv::Size size);
 	void setCropArea(cv::Size size);
 
-	const unsigned int getX(int i) const {
-		return data.x[i];
-	}
+	void setX(unsigned int i, int x);
+	void setY(unsigned int i, int y);
 
-	const unsigned int getCounterX(int i) const {
-		return data.x_counter[i];
-	}
+	void setCropX(unsigned int i, int x);
 
-	const unsigned int getCropX(int i) const {
-		return data.x_crop[i];
-	}
+	void setCropY(unsigned int i, int y);
 
-	const unsigned int getInterestX(int i) const {
-		return data.x_interest[i];
-	}
+	unsigned int getX(int i);
 
-	const unsigned int getY(int i) const {
-		return data.y[i];
-	}
+	unsigned int getCounterX(int i);
 
-	const unsigned int getCounterY(int i) const {
-		return data.y_counter[i];
-	}
+	void setCounterX(int i, int x);
 
-	const unsigned int getCropY(int i) const {
-		return data.y_crop[i];
-	}
+	void setCounterY(int i, int y);
 
-	const unsigned int getInterestY(int i) const {
-		return data.y_interest[i];
-	}
+	unsigned int getCropX(int i);
 
-	const unsigned int getInterestWidth() const {
-		return getInterestX(1) - getInterestX(0);
-	}
+	unsigned int getInterestX(int i);
 
-	const unsigned int getInterestHeight() const {
-		return getInterestY(1) - getInterestY(0);
-	}
+	void setInterestX(int i, int x);
 
-	const unsigned int getCropWidth() const {
-		return getCropX(1) - getCropX(0);
-	}
-	const unsigned int getCropHeight() const {
-		return getCropY(1) - getCropY(0);
-	}
+	unsigned int getY(int i);
+
+	unsigned int getCounterY(int i);
+
+	unsigned int getCropY(int i);
+
+	unsigned int getInterestY(int i);
+
+	void setInterestY(int i, int y);
+
+	unsigned int getInterestWidth();
+
+	unsigned int getInterestHeight() ;
+
+	unsigned int getCropWidth();
+	unsigned int getCropHeight();
+
+	std::string getAddress() ;
+
+	void setAddress(std::string a);
 
 	unsigned int GetLeftCounter();
 	void SetLeftCounter(unsigned int counter);
@@ -119,10 +141,6 @@ public:
 	void SetInterestPos(unsigned int index, cv::Point pt);
 	void SetInterestPos(unsigned int index, int x, int y);
 
-protected:
-	void PersistData(ConfigData &config);
-	void PersistData();
-	ConfigData LoadData();
 };
 
 #endif /* CYCLOCONFIG_HPP_ */
