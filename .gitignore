@@ -17,3 +17,6 @@ gdb_cmds
 .cproject
 .project
 .settings/
+/cppcomplete.tags
+/Makefile.new
+/Makefile.sugestion
