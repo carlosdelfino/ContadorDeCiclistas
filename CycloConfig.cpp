@@ -116,6 +116,8 @@ void CycloConfig::PersistData() {
 	tree.put(PROP_COUNTER_RIGHT_Y, this->getCounterY(1));
 
 	std::cout << "** CycloConfig> gravando area de corte" << std::endl;
+	tree.put(PROP_CROP_WINDOW_X, this->getCropWindowPosX());
+	tree.put(PROP_CROP_WINDOW_Y, this->getCropWindowPosY());
 	tree.put(PROP_CROP_LEFT_X, this->getCropX(0));
 	tree.put(PROP_CROP_LEFT_Y, this->getCropY(0));
 	tree.put(PROP_CROP_RIGHT_X, this->getCropX(1));
@@ -195,6 +197,8 @@ void CycloConfig::LoadData() {
 		this->setCounterY(1, tree.get<int>(PROP_COUNTER_RIGHT_Y));
 
 		std::cout << "** CycloConfig> Lendo area de corte" << std::endl;
+		this->setCropWindowX(tree.get<unsigned int>(PROP_CROP_WINDOW_X));
+		this->setCropWindowY(tree.get<unsigned int>(PROP_CROP_WINDOW_Y));
 		this->setCropX(0, tree.get<int>(PROP_CROP_LEFT_X));
 		this->setCropY(0, tree.get<int>(PROP_CROP_LEFT_Y));
 		this->setCropX(1, tree.get<int>(PROP_CROP_RIGHT_X));
@@ -274,6 +278,15 @@ void CycloConfig::setX(unsigned int i, int x) {
 void CycloConfig::setY(unsigned int i, int y) {
 	data.y[i] = y;
 }
+
+void CycloConfig::setCropWindowX(unsigned int x) {
+	data.x_crop_windowPos = x;
+}
+
+void CycloConfig::setCropWindowY(unsigned int y) {
+	data.y_crop_windowPos = y;
+}
+
 void CycloConfig::setCropX(unsigned int i, int x) {
 	data.x_crop[i] = x;
 }

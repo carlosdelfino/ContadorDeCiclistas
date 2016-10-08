@@ -180,7 +180,7 @@ int main(int argc, char **argv) {
 
 	if (!cap) {
 		if (debug)
-			std::cout << "Error: could not create a VideoCapture object"
+			std::cerr << "Error: could not create a VideoCapture object"
 					<< std::endl;
 		exit(EXIT_FAILURE);
 	}

@@ -156,6 +156,10 @@ public:
 
 	unsigned int getCropWindowPosX();
 	unsigned int getCropWindowPosY();
+
+	void setCropWindowX(unsigned int x);
+	void setCropWindowY(unsigned int y);
+
 	unsigned long countInteraction();
 };
 
