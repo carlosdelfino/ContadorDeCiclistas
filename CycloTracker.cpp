@@ -295,9 +295,9 @@ int main(int argc, char **argv) {
 		ot.PrintLeftPartial(full, lCounter);
 		ot.PrintRightPartial(full, rCounter);
 
+		ProvideOsd(full, sd, ot);
 		std::cout << "** passei **" << debug++ << std::endl;
 		std::cout.flush();
-		ProvideOsd(full, sd, ot);
 		ProvidePip(frame, full);
 
 		std::cout << "** passei **" << debug++ << std::endl;

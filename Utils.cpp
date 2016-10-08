@@ -9,28 +9,32 @@ bool IsMidnight() {
 	time_t rawtime;
 	struct tm * timeinfo;
 
-	time (&rawtime);
-	timeinfo = localtime (&rawtime);
-	
-	int now = timeinfo->tm_sec + timeinfo->tm_min*60 + timeinfo->tm_hour*60*60;
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+
+	int now = timeinfo->tm_sec + timeinfo->tm_min * 60
+			+ timeinfo->tm_hour * 60 * 60;
 	return now == 0;
 }
 
 void print_usage(std::string program_name) {
-	std::cout << program_name << " usage:" << std::endl <<
-		"\t--help   (-h): print this message." << std::endl <<
-		"\t--override (-O): override point picked parameters." << std::endl <<
-		"\t--reg_source (-s) <file_name>: Specify regular file where data " <<
-			"comes from." << std::endl <<
-		"\t--dev_source (-D) <number>: Specify device number where data " <<
-			"comes from." << std::endl <<
-		"\t--record (-r) <file_name>: Record video to filename." <<	std::endl <<
-		"\t--stream (-S) <device>: Streams video via device." << std::endl <<
-		"\t--sensor (-t) <device>: Specify device file which is a sensor." <<
-			std::endl <<
-		"\t--address (-a) <address>: address must be present and must be in " <<
-		"in this format: street-number. --address faria_lima-1200." <<
-			std::endl;
+	std::cout << program_name << " usage:" << std::endl
+			<< "\t--help   (-h): print this message." << std::endl
+			<< "\t--override (-O): override point picked parameters."
+			<< std::endl
+			<< "\t--reg_source (-s) <file_name>: Specify regular file where data "
+			<< "comes from." << std::endl
+			<< "\t--dev_source (-D) <number>: Specify device number where data "
+			<< "comes from." << std::endl
+			<< "\t--record (-r) <file_name>: Record video to filename."
+			<< std::endl
+			<< "\t--stream (-S) <device>: Streams video via device."
+			<< std::endl
+			<< "\t--sensor (-t) <device>: Specify device file which is a sensor."
+			<< std::endl
+			<< "\t--address (-a) <address>: address must be present and must be in "
+			<< "in this format: street-number. --address faria_lima-1200."
+			<< std::endl;
 	return;
 }
 
@@ -38,15 +42,16 @@ bool test_file(std::string file) {
 	const char *c;
 	int fd;
 
-	if(file.empty()) return true;
+	if (file.empty())
+		return true;
 
 	c = file.c_str();
-	if((fd = open(c, O_RDWR)) < 0) {
-		std::cout << "'" << file << "': "; std::cout.flush();
+	if ((fd = open(c, O_RDWR)) < 0) {
+		std::cout << "'" << file << "': ";
+		std::cout.flush();
 		perror("The following error occurred");
 		return false;
-	}
-	else {
+	} else {
 		close(fd);
 		return true;
 	}
@@ -54,19 +59,23 @@ bool test_file(std::string file) {
 
 void Print(const char *message, cv::Point position, cv::Mat &frame,
 		unsigned int fontSize, unsigned int thickness) {
-		cv::putText(frame, std::string(message),  position,
-					CV_FONT_HERSHEY_PLAIN, fontSize, cv::Scalar(0, 0, 0),
-					thickness, CV_AA);
+	cv::putText(frame, std::string(message), position,
+	CV_FONT_HERSHEY_PLAIN, fontSize, cv::Scalar(0, 0, 0), thickness, CV_AA);
 }
 
 void ProvidePip(cv::Mat &frame, cv::Mat &dst) {
-	cv::Size pip1Size(std::min(400, frame.size().width), std::min(200,
-					  frame.size().height));
-	cv::Rect pip1Rect(cv::Point(dst.size().width - pip1Size.width - 20, 20),
-					  pip1Size);
+	cv::Size size = frame.size();
+	cv::Size pip1Size(std::min(400, size.width), std::min(200, size.height));
+
+	cv::Size dstSize = dst.size();
+	cv::Rect pip1Rect(cv::Point(dstSize.width - pip1Size.width - 20, 20),
+			pip1Size);
+
 	cv::Mat pip1;
 	cv::resize(frame, pip1, pip1Size);
 
+	std::cout << "** passei **" << std::endl;
+	std::cout.flush();
 	cv::rectangle(dst, pip1Rect, cv::Scalar(0, 0, 255), 5);
 	pip1.copyTo(dst(pip1Rect));
 }
@@ -74,71 +83,74 @@ void ProvidePip(cv::Mat &frame, cv::Mat &dst) {
 void ProvideOsd(cv::Mat &frame, SensorData *sd, ObjectTracker &ot) {
 	static cv::Mat logo = cv::imread("logo.jpg", CV_LOAD_IMAGE_COLOR);
 	static cv::Mat cyclist = cv::imread("cyclist.jpg", CV_LOAD_IMAGE_COLOR);
-	
+
 	cv::Size sz = frame.size();
 	cv::Point basePoint(0, sz.height - 80);
 	int textVerticalSep = 20;
 	int textTop = basePoint.y + 30;
 	char mesgBuf[20];
-	
+
 	//Draw OSD
 	cv::rectangle(frame, basePoint, cv::Point(sz.width, sz.height),
-				  cv::Scalar(255, 255, 255), CV_FILLED, 8,0);
-	
+			cv::Scalar(255, 255, 255), CV_FILLED, 8, 0);
+
 	//Paste logo
 	cv::Rect logoRect(
-				cv::Point(10,
-						  (sz.height + basePoint.y - logo.size().height) / 2 ),
-						  logo.size()
-					 );
+			cv::Point(10, (sz.height + basePoint.y - logo.size().height) / 2),
+			logo.size());
 	logo.copyTo(frame(logoRect));
 
 	//Paste cyclist
-	cv::Rect cyclistRect(cv::Point(frame.size().width-225, textTop - 25),
-						 		   cyclist.size());
-	cyclist.copyTo(frame(cyclistRect));	
+	cv::Rect cyclistRect(cv::Point(frame.size().width - 225, textTop - 25),
+			cyclist.size());
+	cyclist.copyTo(frame(cyclistRect));
 
 	//Put data		
-	if(sd) {
+	if (sd) {
 		//sprintf(mesgBuf, "CO: %s", sd.co.c_str());
 		//Print(mesgBuf, cv::Point(frame.size().width-170, textTop), frame);
 
 		sprintf(mesgBuf, "Pressao: %dPa", sd->pressure);
-		Print(mesgBuf, cv::Point(frame.size().width-160,
-								 textTop + textVerticalSep * 2), frame);
+		Print(mesgBuf,
+				cv::Point(frame.size().width - 160,
+						textTop + textVerticalSep * 2), frame);
 
 		sprintf(mesgBuf, "Umidade: %d%%", sd->umidity);
-		Print(mesgBuf, cv::Point(frame.size().width-160,
-								 textTop + textVerticalSep), frame);	
+		Print(mesgBuf,
+				cv::Point(frame.size().width - 160, textTop + textVerticalSep),
+				frame);
 
 		sprintf(mesgBuf, "%d C", sd->temperature);
-		Print(mesgBuf, cv::Point(frame.size().width-125, textTop), frame, 2);
+		Print(mesgBuf, cv::Point(frame.size().width - 125, textTop), frame, 2);
 
-		sprintf(mesgBuf, "%d", sd->temperature);		
+		sprintf(mesgBuf, "%d", sd->temperature);
 		sz = cv::getTextSize(mesgBuf, CV_FONT_HERSHEY_PLAIN, 2, 2, nullptr);
-		sprintf(mesgBuf, "o");		
-		Print(mesgBuf, cv::Point(frame.size().width - 127 + sz.width,
-								 textTop - (sz.height) + 2), frame, 1);
+		sprintf(mesgBuf, "o");
+		Print(mesgBuf,
+				cv::Point(frame.size().width - 127 + sz.width,
+						textTop - (sz.height) + 2), frame, 1);
 	}
 
 	sprintf(mesgBuf, "%d", ot.GetTotal());
-	Print(mesgBuf, cv::Point(frame.size().width-300, textTop + 7), frame, 2);
+	Print(mesgBuf, cv::Point(frame.size().width - 300, textTop + 7), frame, 2);
 
 	sprintf(mesgBuf, "Hoje");
-	Print(mesgBuf, cv::Point(frame.size().width-275,
-							 textTop + textVerticalSep* 2), frame, 2);
-			
-	time_t time_now = time(nullptr);
-	char buff[50];		
-		
-	sprintf(buff, "Faria Lima");
-	Print(buff, cv::Point(frame.size().width-410, textTop), frame, 1);		
-		
-	strftime(buff, sizeof(buff), "%d/%m/%y", localtime(&time_now));
-	Print(buff, cv::Point(frame.size().width-410, textTop + textVerticalSep),
-						  frame);		
+	Print(mesgBuf,
+			cv::Point(frame.size().width - 275, textTop + textVerticalSep * 2),
+			frame, 2);
 
-	strftime(buff, sizeof(buff), "%X", localtime(&time_now));		
-	Print(buff, cv::Point(frame.size().width-410,
-						  textTop + textVerticalSep * 2), frame);			
+	time_t time_now = time(nullptr);
+	char buff[50];
+
+	sprintf(buff, "Faria Lima");
+	Print(buff, cv::Point(frame.size().width - 410, textTop), frame, 1);
+
+	strftime(buff, sizeof(buff), "%d/%m/%y", localtime(&time_now));
+	Print(buff, cv::Point(frame.size().width - 410, textTop + textVerticalSep),
+			frame);
+
+	strftime(buff, sizeof(buff), "%X", localtime(&time_now));
+	Print(buff,
+			cv::Point(frame.size().width - 410, textTop + textVerticalSep * 2),
+			frame);
 }
