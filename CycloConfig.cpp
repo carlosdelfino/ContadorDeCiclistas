@@ -358,3 +358,7 @@ void CycloConfig::setAddress(std::string a) {
 
 	this->data.address = a;
 }
+
+unsigned long CycloConfig::countInteraction(){
+return ++interaction;
+}

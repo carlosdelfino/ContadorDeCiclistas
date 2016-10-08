@@ -20,7 +20,7 @@
 void MouseCallback(int event, int x, int y,
 		int __attribute__((__unused__)) flags,
 		void __attribute__((__unused__)) *data) {
-	CycloConfig config = CycloConfig::get();
+	CycloConfig &config = CycloConfig::get();
 	static InteractionHandler ih(config.getAddress());
 	if (ih.hasCurrentCallbackFunction()) {
 		switch (event) {
@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
 			<< std::endl;
 	std::cout << "** Obtendo configurações                           **"
 			<< std::endl;
-	CycloConfig config = CycloConfig::get();
+	CycloConfig &config = CycloConfig::get();
 	std::cout << "** configurações carregadas                        **"
 			<< std::endl;
 	std::cout.flush();
@@ -239,9 +239,6 @@ int main(int argc, char **argv) {
 		std::cout << "** Criando rastreador de objetos " << std::endl;
 	ObjectTracker ot(30, 50, interestArea);
 
-	if (debug)
-		std::cout << "** Criando Processador de imagens" << std::endl;
-
 	cv::Point lCounter(config.getCounterX(0), config.getCounterY(0));
 	cv::Point rCounter(config.getCounterX(1), config.getCounterY(1));
 	if (debug)
@@ -318,6 +315,8 @@ int main(int argc, char **argv) {
 		if (IsMidnight()) {
 			ot.ZeroCounters();
 		}
+
+		config.countInteraction();
 	} while (char(cv::waitKey(30)) == char(27));
 
 	if (!sensor_device.empty()) {
@@ -330,6 +329,7 @@ int main(int argc, char **argv) {
 	if (outputFile)
 		delete outputFile;
 
+	config.~CycloConfig();
 	exit(0);
 	return 0;
 }

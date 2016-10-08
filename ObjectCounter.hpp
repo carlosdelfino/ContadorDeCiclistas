@@ -2,10 +2,13 @@
 #define OBJECT_COUNTER_HPP
 
 #include <opencv2/opencv.hpp>
+#include "CycloConfig.hpp"
 #include "TrackedObject.hpp"
 
 class ObjectCounter {
 private:
+	CycloConfig &config = CycloConfig::get();
+
 	unsigned int countedPoint[100];
 	unsigned short int pos;
 	unsigned int totalLeftCount;

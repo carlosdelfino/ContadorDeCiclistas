@@ -44,30 +44,37 @@ typedef struct {
 	unsigned int left_counter = 50;
 	unsigned int right_counter = 100;
 
-	int x_counter[2] = {10, 200};
-	int y_counter[2] = {10, 10};
+	int x_counter[2] = { 10, 200 };
+	int y_counter[2] = { 10, 10 };
 
-	int x[4] = {0, 640,   0, 640};
-	int y[4] = {0,   0, 480, 480};
+	int x[4] = { 0, 640, 0, 640 };
+	int y[4] = { 0, 0, 480, 480 };
 
-	int x_crop[2] = {10, 300};
-	int y_crop[2] = {10, 300};
+	int x_crop[2] = { 10, 300 };
+	int y_crop[2] = { 10, 300 };
 
-	int x_interest[2] = { 20, 200};
-	int y_interest[2] = { 20, 200};
+	int x_interest[2] = { 20, 200 };
+	int y_interest[2] = { 20, 200 };
 
 	std::string address = "Av. Carapinina, 1000";
 
-}ConfigData;
+} ConfigData;
 
 class CycloConfig {
+
 private:
 	const char *configFile = "CycloTracker.conf";
 	ConfigData data;
-
+	unsigned long interaction = 0;
 	CycloConfig();
 
 public:
+	//Desabilita Construtor de Cópia gerado pelo compilador
+	CycloConfig(const CycloConfig &) = delete;
+
+	//Desabilita Operador de Atribuição gerado pelo compilador
+	CycloConfig &operator=(const CycloConfig &) = delete;
+
 	virtual ~CycloConfig();
 
 	void PersistData();
@@ -111,12 +118,12 @@ public:
 
 	unsigned int getInterestWidth();
 
-	unsigned int getInterestHeight() ;
+	unsigned int getInterestHeight();
 
 	unsigned int getCropWidth();
 	unsigned int getCropHeight();
 
-	std::string getAddress() ;
+	std::string getAddress();
 
 	void setAddress(std::string a);
 
@@ -141,6 +148,7 @@ public:
 	void SetInterestPos(unsigned int index, cv::Point pt);
 	void SetInterestPos(unsigned int index, int x, int y);
 
+	unsigned long countInteraction();
 };
 
 #endif /* CYCLOCONFIG_HPP_ */

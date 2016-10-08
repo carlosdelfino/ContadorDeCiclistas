@@ -40,7 +40,7 @@ public:
 	bool hasCurrentCallbackFunction();
 
 private:
-	CycloConfig config = CycloConfig::get();
+	CycloConfig &config = CycloConfig::get();
 	int globalStep;
 	void (InteractionHandler::*CurrentCallbackFunction)(int x, int y);
 

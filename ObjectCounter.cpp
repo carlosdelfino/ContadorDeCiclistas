@@ -3,7 +3,7 @@
 #include "Utils.hpp"
 
 ObjectCounter::ObjectCounter(cv::Rect referenceBox) {
-	CycloConfig config = CycloConfig::get();
+
 	memset(this->countedPoint, -1, sizeof(this->countedPoint));
 	this->pos = 0;
 	this->totalLeftCount = config.GetLeftCounter();
@@ -33,7 +33,6 @@ bool ObjectCounter::AccountPoint(TrackedObject point) {
 			point.pt.x < this->referenceBox.br().x &&
 			point.pt.y > this->referenceBox.tl().y &&
 			point.pt.y < this->referenceBox.br().y) {
-			CycloConfig config = CycloConfig::get();
 			
 			if (point.ltr) {
 				this->totalLeftCount++;
@@ -68,7 +67,6 @@ unsigned int ObjectCounter::GetRTLPoints() {
 }
 
 void ObjectCounter::ZeroCounters() {
-	CycloConfig config = CycloConfig::get();
 	
 	this->totalLeftCount = 0;
 	this->totalRightCount = 0;
