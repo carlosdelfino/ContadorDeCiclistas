@@ -191,6 +191,9 @@ int main(int argc, char **argv) {
 				<< std::endl;
 	// Obtemos o primeiro Frame para calculos de tamanho da janela
 	cv::Mat frame;
+
+	ImageProcessor ip;
+
 	*cap >> frame;
 
 	cv::Size frame_size = frame.size();
@@ -239,8 +242,6 @@ int main(int argc, char **argv) {
 	if (debug)
 		std::cout << "** Criando Processador de imagens" << std::endl;
 
-	ImageProcessor ip;
-
 	cv::Point lCounter(config.getCounterX(0), config.getCounterY(0));
 	cv::Point rCounter(config.getCounterX(1), config.getCounterY(1));
 	if (debug)
@@ -279,6 +280,10 @@ int main(int argc, char **argv) {
 		std::cout << "** Inciando loop de processamento das imagens"
 				<< std::endl;
 	do {
+		cv::Rect interestArea(config.getInterestX(0), config.getInterestY(0),
+				config.getInterestWidth(), config.getInterestHeight());
+		ot.SetInterestArea(interestArea);
+
 		*cap >> frame; // captura um novo frame e processa imediatamente
 
 		if (outputFile)
