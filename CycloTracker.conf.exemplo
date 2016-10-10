@@ -1,47 +1,52 @@
 {
+    "frame":
+    {
+        "width": "640",
+        "height": "480"
+    },
     "counter":
     {
-        "left": "204",
-        "right": "290",
-        "left_x": "50",
+        "left": "0",
+        "right": "0",
+        "left_x": "58",
         "left_y": "350",
-        "right_x": "500",
-        "right_y": "350"
+        "right_x": "538",
+        "right_y": "326"
     },
     "crop":
     {
         "window":
         {
-            "dist_x": "20",
-            "dist_y": "100"
+            "dist_x": "10",
+            "dist_y": "60"
         },
-        "left_x": "0",
-        "left_y": "0",
-        "right_x": "640",
-        "right_y": "480"
+        "left_x": "99",
+        "left_y": "68",
+        "right_x": "415",
+        "right_y": "243"
     },
     "interest":
     {
-        "start_x": "0",
-        "start_y": "0",
-        "end_x": "640",
-        "end_y": "480"
+        "start_x": "95",
+        "start_y": "36",
+        "end_x": "192",
+        "end_y": "138"
     },
     "perspective":
     {
         "superior":
         {
-            "left_x": "0",
-            "left_y": "0",
-            "right_x": "640",
-            "right_y": "0"
+            "left_x": "20",
+            "left_y": "21",
+            "right_x": "620",
+            "right_y": "22"
         },
         "inferior":
         {
-            "left_x": "0",
-            "left_y": "480",
-            "right_x": "640",
-            "right_y": "480"
+            "left_x": "21",
+            "left_y": "451",
+            "right_x": "622",
+            "right_y": "461"
         }
     },
     "address": "Av. Carapinina, 1000"
