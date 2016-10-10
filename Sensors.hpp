@@ -9,9 +9,9 @@ typedef struct {
 	int temperature;
 	int pressure;
 	int co;
-}SensorData;
+} SensorData;
 
-void RetrieveSensorData(const char *device, SensorData *sensorData);
+void RetrieveSensorData(const char*  device, SensorData *sensorData);
 
-std::thread *StartSensorsThread(const char *device, SensorData *sd);
+std::thread *StartSensorsThread(const char*  device, SensorData *sd);
 #endif

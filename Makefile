@@ -7,7 +7,8 @@
 DISTDIR=./bin/
 BIN=CycloTracker
 
-OBJ=CycloTracker.o \
+OBJ=main.o \
+	CycloTracker.o \
 	CycloConfig.o \
 	InteractionHandler.o \
 	VideoOutput.o \

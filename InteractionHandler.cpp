@@ -7,17 +7,23 @@
 
 #include "InteractionHandler.hpp"
 
-#include "CycloConfig.hpp"
+#include<boost/format.hpp>
+
 #include<opencv2/opencv.hpp>
+
 #include <string>
+
+#include "CycloConfig.hpp"
+#include "CycloTracker.hpp"
 
 InteractionHandler::InteractionHandler(std::string windowName) {
 	this->windowName = windowName;
-
+	std::cout << "** Criando Gerenciador de Janela " << std::endl;
 	SetAction(InteractionAction::START);
 }
 
-InteractionHandler::~InteractionHandler() {}
+InteractionHandler::~InteractionHandler() {
+}
 
 void InteractionHandler::GetInterestArea(int x, int y) {
 	static int step = 0;
@@ -27,17 +33,21 @@ void InteractionHandler::GetInterestArea(int x, int y) {
 	y_internal[step] = y;
 	switch (step) {
 	case 0:
-		printf(
-				"Selecione agora o limite da area de contagem a direita inferior\n");
+		std::cout
+				<< "Selecione agora o limite da area de contagem a direita inferior"
+				<< std::endl;
 		break;
 	case 1:
-		step = 0;
 		config.SetInterestPos(0, x_internal[0], y_internal[0]);
 		config.SetInterestPos(1, x_internal[1], y_internal[1]);
-
-		printf(
-				"Pronto os limites de area de interesse são: (%d,%d x %d,%d)\n\n",
-				x_internal[0], y_internal[0], x_internal[1], y_internal[1]);
+		std::cout
+				<< boost::format(
+						"Pronto os limites de area de interesse são: (%d,%d x %d,%d)")
+						% config.getInterestX(0) % config.getInterestY(0)
+						% config.getInterestX(1) % config.getInterestY(1)
+				<< std::endl << std::endl;
+		step = 0;
+		nextCallBack();
 		return;
 	default:
 		printf("Error: GetInterestArea: step = %d\n", step);
@@ -79,6 +89,12 @@ void InteractionHandler::SetAction(InteractionAction action) {
 		CurrentCallbackFunction = &InteractionHandler::GetInterestArea;
 		break;
 	case NONE:
+		std::cout << "## Pronto Finzalizado a parametrização do sistema"
+				<< std::endl << std::endl
+				<< "## Você pode continuar usando o software," << std::endl
+				<< "## ou se prefire tecle [ESC]" << std::endl
+				<< "## e rode quando quiser sem a opção -O" << std::endl
+				<< std::endl;
 		CurrentCallbackFunction = nullptr;
 		break;
 	default:
@@ -93,10 +109,11 @@ bool InteractionHandler::hasCurrentCallbackFunction() {
 }
 
 void InteractionHandler::callCurrentCallBack(int x, int y) {
+	std::cout << "currentCallBack" << std::endl;
 	(this->*CurrentCallbackFunction)(x, y);
 }
 
-void InteractionHandler::nextStep() {
+void InteractionHandler::nextCallBack() {
 	globalStep++;
 	if (globalStep >= InteractionAction::ERROR) {
 		printf(
@@ -105,15 +122,11 @@ void InteractionHandler::nextStep() {
 		exit(255);
 	}
 	SetAction(static_cast<InteractionAction>(globalStep));
-
 }
 
 void InteractionHandler::start(int x __attribute__((unused)),
 		int y __attribute__((unused))) {
-
-	printf(
-			"\n\nClique na janela %s para começar a marcação.\n ATENÇÃO: Este clique é apenas para começar as marcações.\n\n",
-			InteractionHandler::windowName.c_str());
+	nextCallBack();
 }
 
 void InteractionHandler::GetCountersArea(int x, int y) {
@@ -127,12 +140,18 @@ void InteractionHandler::GetCountersArea(int x, int y) {
 		printf("Agora, clique para posicionar o seguundo contador");
 		break;
 	case 1:
-		step = 0;
 		config.SetCounterPos(0, x_internal[0], y_internal[0]);
 		config.SetCounterPos(1, x_internal[1], y_internal[1]);
-		printf("Pronto, você posicionou os contadores:\n");
-		printf("primeiro contador (%d,%d)\n segundo contador (%d,%d)\n\n",
-				x_internal[0], y_internal[0], x_internal[1], y_internal[1]);
+		std::cout << "Pronto, você posicionou os contadores:" << std::endl;
+		std::cout
+				<< boost::format("primeiro contador (%d,%d)")
+						% config.getCounterX(0) % config.getCounterY(0)
+				<< std::endl
+				<< boost::format("segundo contador (%d,%d)")
+						% config.GetCounterPos(1) % config.getCounterY(1)
+				<< std::endl << std::endl;
+		step = 0;
+		nextCallBack();
 		return;
 	default:
 		printf("Error: GetCountersArea: step = %d\n", step);
@@ -150,16 +169,18 @@ void InteractionHandler::GetPerspectivePoints(int x, int y) {
 	y_internal[step] = y;
 	switch (step) {
 	case 0:
-		printf("Selecione agora o canto direito superior da pespectiva");
+		std::cout << "Selecione agora o canto direito superior da pespectiva"
+				<< std::endl;
 		break;
 	case 1:
-		printf("Selecione agora o canto esquerdo inferior da pespectiva");
+		std::cout << "Selecione agora o canto esquerdo inferior da pespectiva"
+				<< std::endl;
 		break;
 	case 2:
-		printf("Selecione agora o canto direito inferior da pespectiva");
+		std::cout << "Selecione agora o canto direito inferior da pespectiva"
+				<< std::endl;
 		break;
 	case 3:
-		step = 0;
 		config.setX(0, x_internal[0]);
 		config.setY(0, y_internal[0]);
 		config.setX(1, x_internal[1]);
@@ -168,7 +189,10 @@ void InteractionHandler::GetPerspectivePoints(int x, int y) {
 		config.setY(2, y_internal[2]);
 		config.setX(3, x_internal[3]);
 		config.setY(3, y_internal[3]);
-		printf("Pronto nossa perspectiva de visão está defindia\n\n");
+		std::cout << "Pronto nossa perspectiva de visão está defindia"
+				<< std::endl << std::endl;
+		nextCallBack();
+		step = 0;
 		return;
 	default:
 		printf("Erro GetPerspectivePoints!! step == %d\n", step);
@@ -189,17 +213,17 @@ void InteractionHandler::GetCropFrame(int x, int y) {
 		printf("Selecione agora o canto inferior direito\n");
 		break;
 	case 1:
-		step = 0;
-		step = 0;
 		config.SetCropPos(0, x_internal[0], y_internal[0]);
 		config.SetCropPos(1, x_internal[1], y_internal[1]);
-
-		printf(
-				"Pronto os limites de processamento de interesse são: (%d,%d x %d,%d)\n\n",
-				x_internal[0], y_internal[0], x_internal[1], y_internal[1]);
-
+		std::cout
+				<< boost::format(
+						"Pronto os limites de processamento de interesse são: (%d,%d x %d,%d)")
+						% config.getCropX(0) % config.getCropY(0)
+						% config.getCropX(1) % config.getCropY(1) << std::endl
+				<< std::endl;
+		nextCallBack();
+		step = 0;
 		return;
-
 	default:
 		printf("Error: GetCropFrame: step = %d\n", step);
 		exit(EXIT_FAILURE);

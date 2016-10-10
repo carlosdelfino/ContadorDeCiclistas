@@ -6,14 +6,20 @@
  */
 
 #include "CycloConfig.hpp"
-#include<opencv2/opencv.hpp>
+
+#include <opencv2/opencv.hpp>
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ini_parser.hpp>
+
 #include <string>
 #include <exception>
 #include <iostream>
+#include<getopt.h>
+
+#include "Utils.hpp"
+
 namespace pt = boost::property_tree;
 
 CycloConfig& CycloConfig::get() {
@@ -24,7 +30,35 @@ CycloConfig& CycloConfig::get() {
 	return instance;
 }
 
-void CycloConfig::setFrameSize(cv::Size size) {
+void CycloConfig::setFullFrameSize(cv::Size size) {
+
+	this->data.width = size.width;
+	this->data.height = size.height;
+
+	if (reconfigure()) {
+		setPerspectiveArea(size);
+		setCropArea(size);
+		setInterestArea(size);
+	}
+}
+
+void CycloConfig::setFullFrameWidth(unsigned int w){
+	this->data.width = w;
+}
+
+void CycloConfig::setFullFrameHeight(unsigned int h){
+	this->data.height = h;
+}
+
+cv::Size CycloConfig::getFullFrameSize() {
+	cv::Size sz(getFullFrameWidth(), getFullFrameHeight());
+	return sz;
+}
+
+/**
+ * @deprecated
+ */
+void CycloConfig::setPerspectiveArea(cv::Size size) {
 	this->data.x[0] = 0;
 	this->data.y[0] = 0;
 
@@ -38,6 +72,19 @@ void CycloConfig::setFrameSize(cv::Size size) {
 	this->data.y[3] = size.height;
 }
 
+/**
+ * @deprecated
+ */
+void CycloConfig::setInterestArea(cv::Size size) {
+	this->data.x_interest[0] = 0;
+	this->data.y_interest[0] = 0;
+	this->data.x_interest[1] = size.width;
+	this->data.y_interest[1] = size.height;
+}
+
+/**
+ * @deprecated
+ */
 void CycloConfig::setCropArea(cv::Size size) {
 	this->data.x_crop[0] = 0;
 	this->data.y_crop[0] = 0;
@@ -73,9 +120,7 @@ void CycloConfig::SetRightCounter(unsigned int counter) {
 }
 
 cv::Point CycloConfig::GetCounterPos(unsigned int index) {
-	cv::Point pt;
-	pt.x = this->data.x_counter[index];
-	pt.y = this->data.y_counter[index];
+	cv::Point pt(this->data.x_counter[index], this->data.y_counter[index]);
 	return pt;
 }
 
@@ -100,10 +145,36 @@ cv::Point CycloConfig::GetInterestPos(unsigned int index) {
 	return pt;
 }
 
+unsigned int CycloConfig::getFullFrameHeight() {
+	return this->data.height;
+}
+
+unsigned int CycloConfig::getFullFrameWidth() {
+	return this->data.width;
+}
+
+
+void CycloConfig::clearPerspectiveArea() {
+	setPerspectiveArea(getFullFrameSize());
+}
+
+void CycloConfig::clearCropArea() {
+	setCropArea(getFullFrameSize());
+}
+
+void CycloConfig::clearInteresstArea() {
+	setInterestArea(getFullFrameSize());
+}
+
 void CycloConfig::PersistData() {
 
 	std::cout << "** CycloConfig> Persistindo configurações" << std::endl;
 	pt::ptree tree;
+
+	std::cout << "** CycloConfig> gravando tamanho padrão da janela principal"
+			<< std::endl;
+	tree.put(PROP_FULL_FRAME_WIDTH, this->getFullFrameWidth());
+	tree.put(PROP_FULL_FRAME_HEIGHT, this->getFullFrameHeight());
 
 	std::cout << "** CycloConfig> gravando valor dos contadores" << std::endl;
 	tree.put(PROP_COUNTER_LEFT, this->GetLeftCounter());
@@ -138,6 +209,9 @@ void CycloConfig::PersistData() {
 	tree.put(PROP_PERSPECTIVE_INFERIOR_LEFT_Y, this->getY(2));
 	tree.put(PROP_PERSPECTIVE_INFERIOR_RIGHT_X, this->getX(3));
 	tree.put(PROP_PERSPECTIVE_INFERIOR_RIGHT_Y, this->getY(3));
+
+	std::cout << "** CycloConfig> gravando endereço" << std::endl;
+	tree.put(PROP_ADDRESS, this->getAddress());
 
 	std::cout << "** CycloConfig> Finalizando Persistencia da configurações"
 			<< std::endl;
@@ -185,6 +259,12 @@ void CycloConfig::LoadData() {
 			std::cout << "**#############################" << std::endl;
 		}
 
+
+		std::cout << "** CycloConfig> gravando tamanho padrão da janela principal"
+				<< std::endl;
+		this->setFullFrameWidth(tree.get<unsigned int>(PROP_FULL_FRAME_WIDTH));
+		this->setFullFrameHeight(tree.get<unsigned int>(PROP_FULL_FRAME_HEIGHT));
+
 		std::cout << "** CycloConfig> Lendo valor dos contadores" << std::endl;
 		this->SetLeftCounter(tree.get<int>(PROP_COUNTER_LEFT));
 		this->SetRightCounter(tree.get<int>(PROP_COUNTER_RIGHT));
@@ -219,6 +299,9 @@ void CycloConfig::LoadData() {
 		this->setY(2, tree.get<int>(PROP_PERSPECTIVE_INFERIOR_LEFT_Y));
 		this->setX(3, tree.get<int>(PROP_PERSPECTIVE_INFERIOR_RIGHT_X));
 		this->setY(3, tree.get<int>(PROP_PERSPECTIVE_INFERIOR_RIGHT_Y));
+
+		std::cout << "** CycloConfig> Lendo endereço" << std::endl;
+		this->setAddress(tree.get<std::string>(PROP_ADDRESS));
 
 	} catch (boost::property_tree::ptree_bad_path& e) {
 		std::cerr << e.what() << std::endl;
@@ -331,6 +414,11 @@ unsigned int CycloConfig::getCounterY(int i) {
 	return data.y_counter[i];
 }
 
+cv::Rect CycloConfig::getCropArea() {
+	cv::Rect cropArea(getCropX(0), getCropY(0), getCropWidth(),
+			getCropHeight());
+	return cropArea;
+}
 unsigned int CycloConfig::getCropY(int i) {
 	return data.y_crop[i];
 }
@@ -380,6 +468,145 @@ unsigned int CycloConfig::getCropWindowPosY() {
 
 }
 
+cv::Rect CycloConfig::getInterestArea() {
+	cv::Rect interestArea(getInterestX(0), getInterestY(0), getInterestWidth(),
+			getInterestHeight());
+	return interestArea;
+}
+
+bool CycloConfig::reconfigure() {
+	return reconfigureFlag;
+}
+
+void CycloConfig::setReconfigure(bool b) {
+	reconfigureFlag = b;
+}
+
 unsigned long CycloConfig::countInteraction() {
+	// contabilizar tempo entre interações também.
 	return ++interaction;
+}
+
+void CycloConfig::parseCommandOptions(int argc, char * const *argv) {
+
+	while ((opt = getopt_long(argc, argv, "s:r:S:t:a:D:hO", long_options,
+			&long_index)) != -1) {
+		switch (opt) {
+		case 's':
+			if (source == DEV_FILE) {
+				std::cout
+						<< "You can only have one source. It has to be either a "
+						<< "regular file or a device file, not both."
+						<< std::endl;
+				exit(EXIT_FAILURE);
+			}
+			source_file = optarg;
+			source = REG_FILE;
+			if (!test_file(source_file)) {
+				std::cout << "Verifique o arquivo de saida se é acessível."
+						<< std::endl;
+				exit(EXIT_FAILURE);
+			}
+			break;
+		case 'D':
+			if (source == REG_FILE) {
+				std::cout
+						<< "You can only have one source. It has to be either a "
+						<< "regular file or a device file, not both."
+						<< std::endl;
+				exit(EXIT_FAILURE);
+			}
+
+			source_device = atoi(optarg);
+			source = DEV_FILE;
+			break;
+		case 'r':
+			record_file = optarg;
+			if (!test_file(source_file)) {
+				std::cout << "Verifique o arquivo está acessivel." << std::endl;
+				exit(EXIT_FAILURE);
+			}
+			break;
+		case 'S':
+			stream_device = optarg;
+			if (!test_file(sensor_device)) {
+				std::cout << "Verifique o dispositivo de stream." << std::endl;
+				exit(EXIT_FAILURE);
+			}
+			break;
+		case 'a':
+			data.address = optarg;
+			break;
+		case 't':
+			sensor_device = optarg;
+			if (!test_file(sensor_device)) {
+				std::cout << "Verifique o dispositivo sensor." << std::endl;
+				exit(EXIT_FAILURE);
+			}
+
+			break;
+		case 'h':
+			print_usage((std::string) argv[0]);
+			exit(EXIT_SUCCESS);
+			break;
+		case 'O':
+			reconfigureFlag = true;
+			break;
+		default:
+			exit(EXIT_FAILURE);
+			break;
+		}
+	}
+	if (source == UNK_FILE) {
+		std::cout << "You must specify where data comes from. Use either:"
+
+		<< std::endl << "\t--reg_source <source_file>." << std::endl
+				<< "\t--dev_source <device number>." << std::endl
+				<< "\tOr --help to print usage." << std::endl;
+		exit(EXIT_FAILURE);
+	}
+
+	if (((source & REG_FILE) && (source_file == record_file))
+			|| ((source & REG_FILE) && (source_file == stream_device))
+			|| ((record_file == stream_device) && !record_file.empty())) {
+		std::cout << "Files must not be the same." << std::endl;
+		exit(EXIT_FAILURE);
+	} //Check all files forced.
+
+}
+
+std::string CycloConfig::getOutputDeviceName() {
+	return this->stream_device;
+}
+
+bool CycloConfig::hasOutputDeviceName() {
+	return !this->stream_device.empty();
+}
+
+std::string CycloConfig::getSensorDeviceName() {
+	return this->sensor_device;
+}
+
+std::string CycloConfig::getSourceFileName() {
+	return this->source_file;
+}
+
+int CycloConfig::getSourceDeviceId() {
+	return this->source_device;
+}
+
+std::string CycloConfig::getRecordFileName() {
+	return this->record_file;
+}
+
+bool CycloConfig::hasRecordFileName() {
+	return !this->record_file.empty();
+}
+
+bool CycloConfig::hasSensorDeviceName() {
+	return !this->sensor_device.empty();
+}
+
+FileType CycloConfig::getSourceType() {
+	return this->source;
 }

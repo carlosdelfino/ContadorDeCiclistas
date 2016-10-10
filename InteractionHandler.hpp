@@ -35,13 +35,13 @@ public:
 
 	void callCurrentCallBack(int x, int y);
 
-	void nextStep(void);
+	void nextCallBack(void);
 
 	bool hasCurrentCallbackFunction();
 
 private:
 	CycloConfig &config = CycloConfig::get();
-	int globalStep;
+	int globalStep = 0;
 	void (InteractionHandler::*CurrentCallbackFunction)(int x, int y);
 
 	std::string windowName;
