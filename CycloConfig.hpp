@@ -15,31 +15,44 @@
 #include <iostream>
 #include <getopt.h>
 
-#define PROP_FULL_FRAME_WIDTH "frame.width"
+#define CROP_MAX_WINDOW_PERCENT (410/640)
+
+#define DEFAULT_CAPTURE_FRAME_DELAY 30
+#define MAX_CAPTURE_FRAME_DELAY INT_MAX-1
+
+#define PROP_FULL_FRAME_WIDTH  "frame.width"
 #define PROP_FULL_FRAME_HEIGHT "frame.height"
 
-#define PROP_COUNTER_LEFT  "counter.left"
-#define PROP_COUNTER_RIGHT  "counter.right"
-#define PROP_COUNTER_LEFT_X  "counter.left_x"
-#define PROP_COUNTER_RIGHT_X  "counter.right_x"
-#define PROP_COUNTER_LEFT_Y  "counter.left_y"
-#define PROP_COUNTER_RIGHT_Y  "counter.right_y"
+#define PROP_DETECTEDOBJ_COUNTER_1        "counter.track.1.counter"
+#define PROP_DETECTEDOBJ_COUNTER_2        "counter.track.2.counter"
+#define PROP_DETECTEDOBJ_COUNTER_1_X      "counter.track.1.x"
+#define PROP_DETECTEDOBJ_COUNTER_2_X      "counter.track.2.x"
+#define PROP_DETECTEDOBJ_COUNTER_1_Y      "counter.track.1.y"
+#define PROP_DETECTEDOBJ_COUNTER_2_Y      "counter.track.2.y"
+
+#define PROP_COUNTER_DETECTEDOBJ_TOTAL          "counter.track.total"
+#define PROP_COUNTER_DETECTEDOBJ_FILE_PATH      "counter.file.basepath"
+#define PROP_COUNTER_DETECTEDOBJ_FILE_PREFIX    "counter.file.prefix"
+#define PROP_COUNTER_DETECTEDOBJ_FILE_EXTENSION "counter.file.extension"
 
 #define PROP_CROP_WINDOW_X  "crop.window.dist_x"
 #define PROP_CROP_WINDOW_Y  "crop.window.dist_y"
-#define PROP_CROP_LEFT_X  "crop.left_x"
-#define PROP_CROP_LEFT_Y  "crop.left_y"
-#define PROP_CROP_RIGHT_X  "crop.right_x"
-#define PROP_CROP_RIGHT_Y  "crop.right_y"
+#define PROP_CROP_LEFT_X    "crop.left_x"
+#define PROP_CROP_LEFT_Y    "crop.left_y"
+#define PROP_CROP_RIGHT_X   "crop.right_x"
+#define PROP_CROP_RIGHT_Y   "crop.right_y"
 
-#define PROP_PERSPECTIVE_SUPERIOR_LEFT_X "perspective.superior.left_x"
-#define PROP_PERSPECTIVE_SUPERIOR_LEFT_Y "perspective.superior.left_y"
+#define PROP_PERSPECTIVE_SUPERIOR_LEFT_X  "perspective.superior.left_x"
+#define PROP_PERSPECTIVE_SUPERIOR_LEFT_Y  "perspective.superior.left_y"
 #define PROP_PERSPECTIVE_SUPERIOR_RIGHT_X "perspective.superior.right_x"
 #define PROP_PERSPECTIVE_SUPERIOR_RIGHT_Y "perspective.superior.right_y"
-#define PROP_PERSPECTIVE_INFERIOR_LEFT_X "perspective.inferior.left_x"
-#define PROP_PERSPECTIVE_INFERIOR_LEFT_Y "perspective.inferior.left_y"
+#define PROP_PERSPECTIVE_INFERIOR_LEFT_X  "perspective.inferior.left_x"
+#define PROP_PERSPECTIVE_INFERIOR_LEFT_Y  "perspective.inferior.left_y"
 #define PROP_PERSPECTIVE_INFERIOR_RIGHT_X "perspective.inferior.right_x"
 #define PROP_PERSPECTIVE_INFERIOR_RIGHT_Y "perspective.inferior.right_y"
+
+#define PROP_LOGO_PRINCIPAL "images.logos.principal"
+#define PROP_LOGO_SECOND    "images.logos.second"
 
 #define PROP_ADDRESS "address"
 
@@ -60,8 +73,8 @@ typedef struct {
 	unsigned int left_counter = 0;
 	unsigned int right_counter = 0;
 
-	unsigned int x_counter[2] = { 50, 500 };
-	unsigned int y_counter[2] = { 350, 350 };
+	unsigned int x_counter[2] = { 50, 50 };
+	unsigned int y_counter[2] = { 150, 200 };
 
 	unsigned int x[4] = { 0, 640, 0, 640 };
 	unsigned int y[4] = { 0, 0, 480, 480 };
@@ -69,13 +82,30 @@ typedef struct {
 	unsigned int x_crop_windowPos = 10;
 	unsigned int y_crop_windowPos = 60;
 
+	unsigned int cropMaxWindowWidth = 350;//640 * CROP_MAX_WINDOW_PERCENT;
+
+	unsigned int cropMaxWindowWeight = 300;//480 * CROP_MAX_WINDOW_PERCENT;
+
 	unsigned int x_crop[2] = { 0, 640 };
 	unsigned int y_crop[2] = { 0, 480 };
 
 	unsigned int x_interest[2] = { 0, 640 };
 	unsigned int y_interest[2] = { 0, 480 };
 
+	std::string pathImageLogo = "images/logo.jpg";
+	std::string pathImageCyclist = "images/cyclist.jpg";
 	std::string address = "Av. Carapinina, 1000";
+
+	unsigned int counterDetectedObject = 0;
+
+	std::string filePahtDetectedObject = "./images/";
+	std::string filePrefixDetectedObject = "Bike-";
+	std::string fileExtensionDetectedObject = "jpg";
+
+	unsigned int distanceThreshold = 30;
+	double contourThreshold = 50;
+
+	unsigned int captureFrameDelay = std::min(DEFAULT_CAPTURE_FRAME_DELAY,MAX_CAPTURE_FRAME_DELAY);
 
 } ConfigData;
 
@@ -139,29 +169,30 @@ public:
 
 	std::string getOutputDeviceName();
 	std::string getSensorDeviceName();
-	int getSourceDeviceId();
 	std::string getSourceFileName();
 	std::string getRecordFileName();
+	int getSourceDeviceId();
 	bool hasSensorDeviceName();
 	bool hasOutputDeviceName();
 	bool hasRecordFileName();
+
 	FileType getSourceType();
 
-	/** @brief cria uma unica instância pra uso em todo o programa (Singelton)
+	/** @brief cria uma única instância pra uso em todo o programa (Singelton)
 	 *
-	 * Uma unica instância da classe CycloConfig deve existir para toda a
+	 * Uma única instância da classe CycloConfig deve existir para toda a
 	 * aplicação assim evita-se bugs e redundância de controle das
 	 * configurações mantendo o sistema padronizado na forma de
 	 * armazena-la.
 	 *
 	 * Para utilizar a classe siga o código abaixo.
-	 * Observe que é obrigatório receber o objeto por referência evitando
+	 * Observe que é obrigatório receber o objeto como ponteiro evitando
 	 * sua duplicação. A tentativa de dúplica-lo irá acarretar erro na compilação.
 	 * @code
-	 * CloseConfig &config = CycloConfig::get();
+	 * CloseConfig *config = CycloConfig::get();
 	 * @endcode
 	 */
-	static CycloConfig& get();
+	static CycloConfig *get();
 
 	/** @brief Seta o tamanho do frame principal, e mantem referência para criação dos demais  frames.
 
@@ -216,6 +247,9 @@ public:
 	unsigned int getCropHeight();
 	unsigned int getCropWindowPosX();
 	unsigned int getCropWindowPosY();
+	unsigned int getCropWindowMaxWidth();
+	unsigned int getCropWindowMaxHeight();
+
 	void setCropArea(cv::Size size);
 	void setCropX(unsigned int i, int x);
 	void setCropY(unsigned int i, int y);
@@ -242,10 +276,34 @@ public:
 	std::string getAddress();
 	void setAddress(std::string a);
 
+	std::string getPathPrincipalLogo();
+	std::string getPathSecondLogo();
+	void setPathImageLogo(std::string);
+	void setPathImageCyclist(std::string);
+
+	unsigned int getCounterDetectedObject();
+	void setCounterDetectedObject(unsigned int);
+
+	void setFilePahtDetectedObject(std::string);
+	void setFilePrefixDetectedObject(std::string);
+	void setFileExtensionDetectedObject(std::string);
+
+	std::string getFilePahtDetectedObject();
+	std::string getFilePrefixDetectedObject();
+	std::string getFileExtensionDetectedObject();
+
+	unsigned int getDistanceThreshold();
+	double getContourThreshold();
+	void setDistanceThreshold(unsigned int);
+	void setContourThreshold(double);
+
 	void setReconfigure(bool b);
 	bool reconfigure();
 
 	unsigned long countInteraction();
+
+	unsigned int getCaptureFrameDelay();
+	void setCaptureFrameDelay(unsigned int );
 };
 
 #endif /* CYCLOCONFIG_HPP_ */

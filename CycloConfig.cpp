@@ -22,11 +22,11 @@
 
 namespace pt = boost::property_tree;
 
-CycloConfig& CycloConfig::get() {
+CycloConfig* CycloConfig::get() {
 #if __cplusplus < 201103L
 #warning "Este código é seguro com o uso do C+11, pode haver problemas relativo a concorrencia em verões inferiores."
 #endif
-	static CycloConfig instance;
+	static CycloConfig *instance = new CycloConfig();
 	return instance;
 }
 
@@ -42,11 +42,11 @@ void CycloConfig::setFullFrameSize(cv::Size size) {
 	}
 }
 
-void CycloConfig::setFullFrameWidth(unsigned int w){
+void CycloConfig::setFullFrameWidth(unsigned int w) {
 	this->data.width = w;
 }
 
-void CycloConfig::setFullFrameHeight(unsigned int h){
+void CycloConfig::setFullFrameHeight(unsigned int h) {
 	this->data.height = h;
 }
 
@@ -153,13 +153,28 @@ unsigned int CycloConfig::getFullFrameWidth() {
 	return this->data.width;
 }
 
-
 void CycloConfig::clearPerspectiveArea() {
 	setPerspectiveArea(getFullFrameSize());
 }
 
 void CycloConfig::clearCropArea() {
 	setCropArea(getFullFrameSize());
+}
+
+void CycloConfig::setPathImageLogo(std::string p) {
+	this->data.pathImageLogo = p;
+}
+
+void CycloConfig::setPathImageCyclist(std::string p) {
+	this->data.pathImageCyclist = p;
+}
+
+std::string CycloConfig::getPathPrincipalLogo() {
+	return this->data.pathImageLogo;
+}
+
+std::string CycloConfig::getPathSecondLogo() {
+	return this->data.pathImageCyclist;
 }
 
 void CycloConfig::clearInteresstArea() {
@@ -177,14 +192,16 @@ void CycloConfig::PersistData() {
 	tree.put(PROP_FULL_FRAME_HEIGHT, this->getFullFrameHeight());
 
 	std::cout << "** CycloConfig> gravando valor dos contadores" << std::endl;
-	tree.put(PROP_COUNTER_LEFT, this->GetLeftCounter());
-	tree.put(PROP_COUNTER_RIGHT, this->GetRightCounter());
+	tree.put(PROP_DETECTEDOBJ_COUNTER_1, this->GetLeftCounter());
+	tree.put(PROP_DETECTEDOBJ_COUNTER_2, this->GetRightCounter());
 
 	std::cout << "** CycloConfig> gravando posição dos contadores" << std::endl;
-	tree.put(PROP_COUNTER_LEFT_X, this->getCounterX(0));
-	tree.put(PROP_COUNTER_LEFT_Y, this->getCounterY(0));
-	tree.put(PROP_COUNTER_RIGHT_X, this->getCounterX(1));
-	tree.put(PROP_COUNTER_RIGHT_Y, this->getCounterY(1));
+	tree.put(PROP_DETECTEDOBJ_COUNTER_1_X, this->getCounterX(0));
+	tree.put(PROP_DETECTEDOBJ_COUNTER_1_Y, this->getCounterY(0));
+	tree.put(PROP_DETECTEDOBJ_COUNTER_2_X, this->getCounterX(1));
+	tree.put(PROP_DETECTEDOBJ_COUNTER_2_Y, this->getCounterY(1));
+
+	tree.put(PROP_COUNTER_DETECTEDOBJ_TOTAL, getCounterDetectedObject());
 
 	std::cout << "** CycloConfig> gravando area de corte" << std::endl;
 	tree.put(PROP_CROP_WINDOW_X, this->getCropWindowPosX());
@@ -209,6 +226,18 @@ void CycloConfig::PersistData() {
 	tree.put(PROP_PERSPECTIVE_INFERIOR_LEFT_Y, this->getY(2));
 	tree.put(PROP_PERSPECTIVE_INFERIOR_RIGHT_X, this->getX(3));
 	tree.put(PROP_PERSPECTIVE_INFERIOR_RIGHT_Y, this->getY(3));
+
+	tree.put(PROP_COUNTER_DETECTEDOBJ_FILE_PATH, getFilePahtDetectedObject());
+	tree.put(PROP_COUNTER_DETECTEDOBJ_FILE_PREFIX,
+			getFilePrefixDetectedObject());
+	tree.put(PROP_COUNTER_DETECTEDOBJ_FILE_EXTENSION,
+			getFileExtensionDetectedObject());
+
+	std::cout << "** CycloConfig> gravando Logo Principal atual" << std::endl;
+	tree.put(PROP_LOGO_PRINCIPAL, this->getPathPrincipalLogo());
+
+	std::cout << "** CycloConfig> gravando Logo Secundário atual" << std::endl;
+	tree.put(PROP_LOGO_SECOND, this->getPathSecondLogo());
 
 	std::cout << "** CycloConfig> gravando endereço" << std::endl;
 	tree.put(PROP_ADDRESS, this->getAddress());
@@ -259,22 +288,33 @@ void CycloConfig::LoadData() {
 			std::cout << "**#############################" << std::endl;
 		}
 
-
-		std::cout << "** CycloConfig> gravando tamanho padrão da janela principal"
+		std::cout
+				<< "** CycloConfig> gravando tamanho padrão da janela principal"
 				<< std::endl;
 		this->setFullFrameWidth(tree.get<unsigned int>(PROP_FULL_FRAME_WIDTH));
-		this->setFullFrameHeight(tree.get<unsigned int>(PROP_FULL_FRAME_HEIGHT));
+		this->setFullFrameHeight(
+				tree.get<unsigned int>(PROP_FULL_FRAME_HEIGHT));
 
 		std::cout << "** CycloConfig> Lendo valor dos contadores" << std::endl;
-		this->SetLeftCounter(tree.get<int>(PROP_COUNTER_LEFT));
-		this->SetRightCounter(tree.get<int>(PROP_COUNTER_RIGHT));
+		this->SetLeftCounter(tree.get<int>(PROP_DETECTEDOBJ_COUNTER_1));
+		this->SetRightCounter(tree.get<int>(PROP_DETECTEDOBJ_COUNTER_2));
 
 		std::cout << "** CycloConfig> Lendo posição dos contadores"
 				<< std::endl;
-		this->setCounterX(0, tree.get<int>(PROP_COUNTER_LEFT_X));
-		this->setCounterY(0, tree.get<int>(PROP_COUNTER_LEFT_Y));
-		this->setCounterX(1, tree.get<int>(PROP_COUNTER_RIGHT_X));
-		this->setCounterY(1, tree.get<int>(PROP_COUNTER_RIGHT_Y));
+		this->setCounterX(0, tree.get<int>(PROP_DETECTEDOBJ_COUNTER_1_X));
+		this->setCounterY(0, tree.get<int>(PROP_DETECTEDOBJ_COUNTER_1_Y));
+		this->setCounterX(1, tree.get<int>(PROP_DETECTEDOBJ_COUNTER_2_X));
+		this->setCounterY(1, tree.get<int>(PROP_DETECTEDOBJ_COUNTER_2_Y));
+
+		setCounterDetectedObject(
+				tree.get<unsigned int>(PROP_COUNTER_DETECTEDOBJ_TOTAL));
+
+		setFilePahtDetectedObject(
+				tree.get<std::string>(PROP_COUNTER_DETECTEDOBJ_FILE_PATH));
+		setFilePrefixDetectedObject(
+				tree.get<std::string>(PROP_COUNTER_DETECTEDOBJ_FILE_PREFIX));
+		setFileExtensionDetectedObject(
+				tree.get<std::string>(PROP_COUNTER_DETECTEDOBJ_FILE_EXTENSION));
 
 		std::cout << "** CycloConfig> Lendo area de corte" << std::endl;
 		this->setCropWindowX(tree.get<unsigned int>(PROP_CROP_WINDOW_X));
@@ -299,6 +339,12 @@ void CycloConfig::LoadData() {
 		this->setY(2, tree.get<int>(PROP_PERSPECTIVE_INFERIOR_LEFT_Y));
 		this->setX(3, tree.get<int>(PROP_PERSPECTIVE_INFERIOR_RIGHT_X));
 		this->setY(3, tree.get<int>(PROP_PERSPECTIVE_INFERIOR_RIGHT_Y));
+
+		std::cout << "** CycloConfig> Lendo Logo Principal atual" << std::endl;
+		this->setPathImageLogo(tree.get<std::string>(PROP_LOGO_PRINCIPAL));
+
+		std::cout << "** CycloConfig> Lendo Logo Secundário atual" << std::endl;
+		this->setPathImageCyclist(tree.get<std::string>(PROP_LOGO_SECOND));
 
 		std::cout << "** CycloConfig> Lendo endereço" << std::endl;
 		this->setAddress(tree.get<std::string>(PROP_ADDRESS));
@@ -463,9 +509,18 @@ void CycloConfig::setAddress(std::string a) {
 unsigned int CycloConfig::getCropWindowPosX() {
 	return data.x_crop_windowPos;
 }
+
 unsigned int CycloConfig::getCropWindowPosY() {
 	return data.y_crop_windowPos;
 
+}
+
+unsigned int CycloConfig::getCropWindowMaxWidth() {
+	return data.cropMaxWindowWidth;
+}
+
+unsigned int CycloConfig::getCropWindowMaxHeight() {
+	return data.cropMaxWindowWeight;
 }
 
 cv::Rect CycloConfig::getInterestArea() {
@@ -609,4 +664,56 @@ bool CycloConfig::hasSensorDeviceName() {
 
 FileType CycloConfig::getSourceType() {
 	return this->source;
+}
+
+unsigned int CycloConfig::getCounterDetectedObject() {
+	return this->data.counterDetectedObject;
+}
+void CycloConfig::setCounterDetectedObject(unsigned int i) {
+	this->data.counterDetectedObject = i;
+}
+
+void CycloConfig::setFilePahtDetectedObject(std::string d) {
+	this->data.filePahtDetectedObject = d;
+}
+
+void CycloConfig::setFilePrefixDetectedObject(std::string d) {
+	this->data.filePrefixDetectedObject = d;
+}
+
+void CycloConfig::setFileExtensionDetectedObject(std::string d) {
+	this->data.filePrefixDetectedObject = d;
+}
+
+std::string CycloConfig::getFilePahtDetectedObject() {
+	return this->data.filePahtDetectedObject;
+}
+
+std::string CycloConfig::getFilePrefixDetectedObject() {
+	return this->data.filePrefixDetectedObject;
+}
+std::string CycloConfig::getFileExtensionDetectedObject() {
+	return this->data.fileExtensionDetectedObject;
+}
+
+unsigned int CycloConfig::getDistanceThreshold() {
+	return this->data.distanceThreshold;
+}
+
+double CycloConfig::getContourThreshold() {
+	return this->data.contourThreshold;
+}
+
+void CycloConfig::setDistanceThreshold(unsigned int d) {
+	this->data.distanceThreshold = d;
+}
+void CycloConfig::setContourThreshold(double c) {
+	this->data.contourThreshold = c;
+}
+
+unsigned int CycloConfig::getCaptureFrameDelay() {
+	return this->data.captureFrameDelay;
+}
+void CycloConfig::setCaptureFrameDelay(unsigned int c) {
+	this->data.captureFrameDelay = c;
 }
