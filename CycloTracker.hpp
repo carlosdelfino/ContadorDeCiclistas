@@ -10,8 +10,11 @@
 
 #include<opencv2/opencv.hpp>
 
+#include<stdint.h>
+
 #include "CycloConfig.hpp"
 #include "VideoOutput.hpp"
+#include "ObjectTracker.hpp"
 #include "Sensors.hpp"
 
 class CycloTracker {
@@ -21,12 +24,15 @@ private:
 	cv::VideoWriter *outputDevice = nullptr;
 	VideoOutput *outputFile = nullptr;
 	SensorData *sd = nullptr;
+
+	void ProvideOsd(cv::Mat &frame, SensorData *sd, ObjectTracker &ot);
+	void ProvidePip(cv::Mat &frame, cv::Mat &dst);
 public:
 	CycloTracker(CycloConfig *config, cv::VideoCapture *cap,
 			cv::VideoWriter *outputDevice, VideoOutput *outputFile,
 			SensorData *sd);
 
-	void processFrames();
+	void processFrames(unsigned int delay = INT_MAX);
 
 	virtual ~CycloTracker();
 
