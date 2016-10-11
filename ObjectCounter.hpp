@@ -7,7 +7,7 @@
 
 class ObjectCounter {
 private:
-	CycloConfig &config = CycloConfig::get();
+	CycloConfig *config = CycloConfig::get();
 
 	unsigned int countedPoint[100];
 	unsigned short int pos;

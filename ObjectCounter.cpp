@@ -6,8 +6,8 @@ ObjectCounter::ObjectCounter(cv::Rect referenceBox) {
 
 	memset(this->countedPoint, -1, sizeof(this->countedPoint));
 	this->pos = 0;
-	this->totalLeftCount = config.GetLeftCounter();
-	this->totalRightCount = config.GetRightCounter();
+	this->totalLeftCount = config->GetLeftCounter();
+	this->totalRightCount = config->GetRightCounter();
 	this->referenceBox = referenceBox;	
 }
 
@@ -36,11 +36,11 @@ bool ObjectCounter::AccountPoint(TrackedObject point) {
 			
 			if (point.ltr) {
 				this->totalLeftCount++;
-				config.SetLeftCounter(this->totalLeftCount);
+				config->SetLeftCounter(this->totalLeftCount);
 			}
 			else {
 				this->totalRightCount++;
-				config.SetRightCounter(this->totalRightCount);
+				config->SetRightCounter(this->totalRightCount);
 			}
 			
 			this->countedPoint[pos++] = point.id;
@@ -71,8 +71,8 @@ void ObjectCounter::ZeroCounters() {
 	this->totalLeftCount = 0;
 	this->totalRightCount = 0;
 	
-	config.SetLeftCounter(this->totalLeftCount);
-	config.SetLeftCounter(this->totalRightCount);
+	config->SetLeftCounter(this->totalLeftCount);
+	config->SetLeftCounter(this->totalRightCount);
 }
 
 void ObjectCounter::SetReferenceBox(cv::Rect referenceBox) {
