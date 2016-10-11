@@ -38,13 +38,13 @@ void InteractionHandler::GetInterestArea(int x, int y) {
 				<< std::endl;
 		break;
 	case 1:
-		config.SetInterestPos(0, x_internal[0], y_internal[0]);
-		config.SetInterestPos(1, x_internal[1], y_internal[1]);
+		config->SetInterestPos(0, x_internal[0], y_internal[0]);
+		config->SetInterestPos(1, x_internal[1], y_internal[1]);
 		std::cout
 				<< boost::format(
 						"Pronto os limites de area de interesse são: (%d,%d x %d,%d)")
-						% config.getInterestX(0) % config.getInterestY(0)
-						% config.getInterestX(1) % config.getInterestY(1)
+						% config->getInterestX(0) % config->getInterestY(0)
+						% config->getInterestX(1) % config->getInterestY(1)
 				<< std::endl << std::endl;
 		step = 0;
 		nextCallBack();
@@ -140,15 +140,15 @@ void InteractionHandler::GetCountersArea(int x, int y) {
 		printf("Agora, clique para posicionar o seguundo contador");
 		break;
 	case 1:
-		config.SetCounterPos(0, x_internal[0], y_internal[0]);
-		config.SetCounterPos(1, x_internal[1], y_internal[1]);
+		config->SetCounterPos(0, x_internal[0], y_internal[0]);
+		config->SetCounterPos(1, x_internal[1], y_internal[1]);
 		std::cout << "Pronto, você posicionou os contadores:" << std::endl;
 		std::cout
 				<< boost::format("primeiro contador (%d,%d)")
-						% config.getCounterX(0) % config.getCounterY(0)
+						% config->getCounterX(0) % config->getCounterY(0)
 				<< std::endl
 				<< boost::format("segundo contador (%d,%d)")
-						% config.GetCounterPos(1) % config.getCounterY(1)
+						% config->GetCounterPos(1) % config->getCounterY(1)
 				<< std::endl << std::endl;
 		step = 0;
 		nextCallBack();
@@ -181,14 +181,14 @@ void InteractionHandler::GetPerspectivePoints(int x, int y) {
 				<< std::endl;
 		break;
 	case 3:
-		config.setX(0, x_internal[0]);
-		config.setY(0, y_internal[0]);
-		config.setX(1, x_internal[1]);
-		config.setY(1, y_internal[1]);
-		config.setX(2, x_internal[2]);
-		config.setY(2, y_internal[2]);
-		config.setX(3, x_internal[3]);
-		config.setY(3, y_internal[3]);
+		config->setX(0, x_internal[0]);
+		config->setY(0, y_internal[0]);
+		config->setX(1, x_internal[1]);
+		config->setY(1, y_internal[1]);
+		config->setX(2, x_internal[2]);
+		config->setY(2, y_internal[2]);
+		config->setX(3, x_internal[3]);
+		config->setY(3, y_internal[3]);
 		std::cout << "Pronto nossa perspectiva de visão está defindia"
 				<< std::endl << std::endl;
 		nextCallBack();
@@ -213,13 +213,13 @@ void InteractionHandler::GetCropFrame(int x, int y) {
 		printf("Selecione agora o canto inferior direito\n");
 		break;
 	case 1:
-		config.SetCropPos(0, x_internal[0], y_internal[0]);
-		config.SetCropPos(1, x_internal[1], y_internal[1]);
+		config->SetCropPos(0, x_internal[0], y_internal[0]);
+		config->SetCropPos(1, x_internal[1], y_internal[1]);
 		std::cout
 				<< boost::format(
 						"Pronto os limites de processamento de interesse são: (%d,%d x %d,%d)")
-						% config.getCropX(0) % config.getCropY(0)
-						% config.getCropX(1) % config.getCropY(1) << std::endl
+						% config->getCropX(0) % config->getCropY(0)
+						% config->getCropX(1) % config->getCropY(1) << std::endl
 				<< std::endl;
 		nextCallBack();
 		step = 0;
