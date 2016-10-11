@@ -37,15 +37,16 @@ CFLAGS=--std=c++11 \
 	   -Wundef \
 	   -Wzero-as-null-pointer-constant \
 	   -Wmissing-declarations \
-	   -Winline \
 	   -g \
 	   -O2 \
 	   `pkg-config --cflags opencv` \
 	   -Werror=c++0x-compat \
 	   -pthread
-# -Wshadow 
-# -Wdouble-promotion //colocar em maquinas 32bits . autconf?
-#  https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
+
+	   #-Winline \
+	   # -Wshadow 
+       # -Wdouble-promotion //colocar em maquinas 32bits . autconf?
+       #  https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
 
 LDFLAGS=-lm \
 	   `pkg-config --libs opencv` \
