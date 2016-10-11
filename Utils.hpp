@@ -16,9 +16,7 @@ bool test_file(std::string file);
 void Print(const char *message, cv::Point position, cv::Mat &frame,
 		   unsigned int fontSize = 1, unsigned int thickness = 1);
 
-void ProvidePip(cv::Mat &frame, cv::Mat &dst);
 
-void ProvideOsd(cv::Mat &frame, SensorData *sd, ObjectTracker &ot);
 
 
 #endif
