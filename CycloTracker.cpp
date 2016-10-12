@@ -196,15 +196,16 @@ void CycloTracker::ProvidePip(cv::Mat &frame, cv::Mat &dst) {
 	const int pip_y_limit = config->getCropWindowPosX();
 
 	cv::Size size = frame.size();
+
+	cv::Size dstSize = dst.size();
+
 	cv::Size pip1Size(
 			std::min(config->getCropWindowMaxWidth(),
 					(unsigned int) (size.width / 2)),
 			std::min(config->getCropWindowMaxHeight(),
 					(unsigned int) (size.height / 2)));
 
-	cv::Size dstSize = dst.size();
 	int pip_x = dstSize.width - pip1Size.width - pip_x_limit;
-
 	cv::Rect pip1Rect(cv::Point(pip_x, pip_y_limit), pip1Size);
 
 	cv::Mat pip1;
