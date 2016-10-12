@@ -109,9 +109,8 @@ void ObjectTracker::PersistImage(cv::Mat &frame) {
 	strftime(date, sizeof(date), "%Y%m%d", localtime(&time_now));
 
 	const unsigned int size = filePath.size() + filePrefix.size() + DATE_SIZE
-			+ 5 + fileExtension.size() + 2;
-	char fileName[size];
-	memset(fileName, '\n', size);
+			+ 5 + fileExtension.size() + 2 + 1;
+	char *fileName = new char[size];
 	sprintf(fileName, "%s/%s%s-%05u.%s", filePath.c_str(), filePrefix.c_str(),
 			date, this->image_counter++, fileExtension.c_str());
 	cv::imwrite(fileName, frame);
@@ -181,7 +180,7 @@ inline void ObjectTracker::PrintRightPartial(cv::Mat &frame, cv::Point pt) {
 			cv::Scalar(0, 255, 255), 3, CV_AA);
 }
 
- inline void ObjectTracker::PrintLeftPartial(cv::Mat &frame, cv::Point pt) {
+inline void ObjectTracker::PrintLeftPartial(cv::Mat &frame, cv::Point pt) {
 	char id[10];
 	sprintf(id, "<%02d", object_counter->GetRTLPoints());
 	cv::putText(frame, std::string(id), pt, CV_FONT_HERSHEY_PLAIN, 3,
@@ -190,11 +189,11 @@ inline void ObjectTracker::PrintRightPartial(cv::Mat &frame, cv::Point pt) {
 			cv::Scalar(0, 255, 255), 3, CV_AA);
 }
 
-  void ObjectTracker::PrintLeftPartial(cv::Mat &frame) {
+void ObjectTracker::PrintLeftPartial(cv::Mat &frame) {
 	PrintLeftPartial(frame, config->GetCounterPos(0));
 }
 
- void ObjectTracker::PrintRightPartial(cv::Mat &frame) {
+void ObjectTracker::PrintRightPartial(cv::Mat &frame) {
 	PrintRightPartial(frame, config->GetCounterPos(1));
 }
 
