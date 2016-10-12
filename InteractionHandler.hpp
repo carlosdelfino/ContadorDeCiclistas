@@ -17,6 +17,7 @@ enum InteractionAction
 	SET_PERSPECTIVE_AREA,
 	SET_CROP_AREA,
 	SET_INTEREST_AREA,
+	SAVE_CONFIG,
 	NONE,
 	ERROR
 };
@@ -51,6 +52,8 @@ private:
 	void setWindowName(std::string windowName) {
 		this->windowName = windowName;
 	}
+
+	void saveConfig(int x, int y);
 
 	void start(int x, int y);
 

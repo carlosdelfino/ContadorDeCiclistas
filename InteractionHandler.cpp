@@ -88,8 +88,12 @@ void InteractionHandler::SetAction(InteractionAction action) {
 				"ATENÇÃO: esta area deve ser lijeiramente maior que o maior objeto a ser contado.\n");
 		CurrentCallbackFunction = &InteractionHandler::GetInterestArea;
 		break;
+	case SAVE_CONFIG:
+		std::cout << "** InteractionHandler: Salvando Configuração"
+				<< std::endl;
+		CurrentCallbackFunction = &InteractionHandler::saveConfig;
 	case NONE:
-		std::cout << "## Pronto Finzalizado a parametrização do sistema"
+		std::cout << "## InteractionHandler: Pronto, Finzalizado a parametrização do sistema"
 				<< std::endl << std::endl
 				<< "## Você pode continuar usando o software," << std::endl
 				<< "## ou se prefire tecle [ESC]" << std::endl
@@ -116,16 +120,26 @@ void InteractionHandler::callCurrentCallBack(int x, int y) {
 void InteractionHandler::nextCallBack() {
 	globalStep++;
 	if (globalStep >= InteractionAction::ERROR) {
-		printf(
-				"Erro na contagem de passos gerais para parametrização, passo %d\n",
-				globalStep);
+		std::cout
+				<< "** InteractionHandler> Erro na contagem de passos gerais para parametrização, "
+				<< boost::format("passo %d\n") % globalStep << std::endl;
 		exit(255);
 	}
 	SetAction(static_cast<InteractionAction>(globalStep));
 }
 
-void InteractionHandler::start(int x __attribute__((unused)),
-		int y __attribute__((unused))) {
+void InteractionHandler::saveConfig(	//.
+		int x __attribute__((unused)),	//.
+		int y __attribute__((unused))	//.
+		) {
+	config->PersistData();
+	config->setReconfigure(false);
+	nextCallBack();
+}
+void InteractionHandler::start(			//.
+		int x __attribute__((unused)),	//.
+		int y __attribute__((unused))	//.
+		) {
 	nextCallBack();
 }
 
