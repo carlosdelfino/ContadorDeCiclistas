@@ -682,7 +682,7 @@ void CycloConfig::setFilePrefixDetectedObject(std::string d) {
 }
 
 void CycloConfig::setFileExtensionDetectedObject(std::string d) {
-	this->data.filePrefixDetectedObject = d;
+	this->data.fileExtensionDetectedObject = d;
 }
 
 std::string CycloConfig::getFilePahtDetectedObject() {
