@@ -31,13 +31,7 @@ void CycloTracker::processFrames(unsigned int delay) {
 
 	std::cout << "** CycloTracker: Criando rastreador de objetos " << std::endl;
 
-	ObjectTracker ot(config);
-
 	cv::Mat frame;
-
-	ImageProcessor ip;
-	cv::Mat fore;
-	char key;
 
 	cv::Point2f p0(config->getX(0), config->getY(0));
 	cv::Point2f p1(config->getX(1), config->getY(1));
@@ -47,6 +41,11 @@ void CycloTracker::processFrames(unsigned int delay) {
 	cv::Rect interestArea = config->getInterestArea();
 	cv::Rect cropArea = config->getCropArea();
 	cv::Mat full;
+	cv::Mat fore;
+	char key;
+
+	ImageProcessor ip(config);
+	ObjectTracker ot(config);
 
 	if (delay == INT_MAX)
 		delay = config->getCaptureFrameDelay();
@@ -56,12 +55,13 @@ void CycloTracker::processFrames(unsigned int delay) {
 
 		full = frame.clone();
 
-		ip.PrepareFrame(frame, cropArea, p0, p1, p2, p3);
+		ip.PrepareFrame(frame);
 
 		fore = ip.AcquireForeground(frame);
 
-		ip.InsertInterestArea(frame, interestArea);
-				ot.IterateTracker(frame, fore);
+		ip.InsertInterestArea(frame);
+
+		ot.IterateTracker(frame, fore);
 
 		ot.PrintTotal(full);
 		ot.PrintLeftPartial(full);
@@ -102,6 +102,10 @@ void CycloTracker::processFrames(unsigned int delay) {
 			interestArea = config->getInterestArea();
 			cropArea = config->getCropArea();
 
+			ip.setCropArea(cropArea);
+			ip.setPerspective(p0, p1, p2, p3);
+			ip.setInterestArea(interestArea);
+
 			ot.SetInterestArea(interestArea);
 		}
 
@@ -113,7 +117,7 @@ void CycloTracker::ProvideOsd(cv::Mat &frame, SensorData *sd,
 		ObjectTracker &ot) {
 	static cv::Mat logo = cv::imread(config->getPathPrincipalLogo(),
 			CV_LOAD_IMAGE_COLOR);
- 	static cv::Mat cyclist = cv::imread(config->getPathSecondLogo(),
+	static cv::Mat cyclist = cv::imread(config->getPathSecondLogo(),
 			CV_LOAD_IMAGE_COLOR);
 
 	cv::Size sz = frame.size();
