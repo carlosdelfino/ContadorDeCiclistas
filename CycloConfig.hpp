@@ -143,7 +143,7 @@ private:
 	std::string sensor_device = ""; //sensor device file
 
 	FileType source = UNK_FILE;
-	const char *configFile = "CycloTracker.conf";
+	std::string configFileName = "CycloTracker.conf";
 	ConfigData data;
 	unsigned long interaction = 0;
 	bool reconfigureFlag = false;
@@ -162,6 +162,7 @@ public:
 
 	virtual ~CycloConfig();
 
+	void PersistData(std::string  fileName);
 	void PersistData();
 	void LoadData();
 

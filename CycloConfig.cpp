@@ -182,6 +182,9 @@ void CycloConfig::clearInteresstArea() {
 }
 
 void CycloConfig::PersistData() {
+	PersistData(this->configFileName);
+}
+void CycloConfig::PersistData(std::string fileName) {
 
 	std::cout << "** CycloConfig> Persistindo configurações" << std::endl;
 	pt::ptree tree;
@@ -245,7 +248,7 @@ void CycloConfig::PersistData() {
 	std::cout << "** CycloConfig> Finalizando Persistencia da configurações"
 			<< std::endl;
 
-	pt::write_json(configFile, tree);
+	pt::write_json(fileName, tree);
 
 	std::cout << "** CycloConfig> Configurações Armazenada" << std::endl;
 }
@@ -257,7 +260,7 @@ void CycloConfig::LoadData() {
 	pt::ptree tree;
 	try {
 		try {
-			pt::read_json(configFile, tree);
+			pt::read_json(this->configFileName, tree);
 		} catch (boost::property_tree::json_parser::json_parser_error& e) {
 			std::cerr << e.what() << std::endl;
 			std::cout << "**#############################" << std::endl;
@@ -269,7 +272,7 @@ void CycloConfig::LoadData() {
 
 			std::cout << "**#############################" << std::endl;
 
-			pt::read_json(configFile, tree);
+			pt::read_json(this->configFileName, tree);
 
 			std::cout << "**#############################" << std::endl;
 		}
@@ -283,7 +286,7 @@ void CycloConfig::LoadData() {
 
 			std::cout << "**#############################" << std::endl;
 
-			pt::read_json(configFile, tree);
+			pt::read_json(this->configFileName, tree);
 
 			std::cout << "**#############################" << std::endl;
 		}
