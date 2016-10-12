@@ -3,26 +3,20 @@
 
 #include<opencv2/opencv.hpp>
 
+#include "CameraConfig.hpp"
+
 class Camera {
 private:
-	float frameRows;
-	float frameCols;
-	float theta;
-	float cosTheta;
-	float sinTheta;
-	float focalDistance;
-	float height;
-	float Rz; //distance from its projection on the ground(xz plane) to
-			  //ciclyst
+	std::string  fileName;
+	CameraConfig *cameraConfig;
 public:
-	Camera();
-	Camera(std::string confFileName);
+	Camera(std::string  confFileName);
 	~Camera();
 
 	void SetFrameRows(int rows);
-	int  GetFrameRows(void);
+	int GetFrameRows(void);
 	void SetFrameCols(int cols);
-	int  GetFrameCols(void);
+	int GetFrameCols(void);
 
 	//d  := known distance from camera to object.
 	//h  := height of the real object.
@@ -52,6 +46,6 @@ public:
 	void SetRz(cv::Point2f P, float h);
 	float GetRz(void);
 
-	void SaveConf(std::string confFileName);
+	void SaveConf(std::string  confFileName);
 };
 #endif
