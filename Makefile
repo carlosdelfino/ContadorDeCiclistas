@@ -7,21 +7,23 @@
 DISTDIR=./bin/
 BIN=CycloTracker
 
-OBJ=main.o \
-	CycloTracker.o \
-	CycloConfig.o \
-	InteractionHandler.o \
-	VideoOutput.o \
-	ImageProcessor.o \
-	ObjectCounter.o \
-	ObjectLocator.o \
-	ObjectTracker.o \
-	PointTracker.o \
-	TrackedObject.o \
-	Sensors.o \
-	Camera.o \
-	CoordTransform.o \
-	Utils.o
+OBJ=						\
+	CycloTracker.o			\
+	CycloConfig.o			\
+	InteractionHandler.o	\
+	VideoOutput.o			\
+	ImageProcessor.o		\
+	ObjectCounter.o			\
+	ObjectLocator.o			\
+	ObjectTracker.o			\
+	PointTracker.o			\
+	TrackedObject.o			\
+	Sensors.o				\
+	Camera.o				\
+	CameraConfig.o			\
+	CoordTransform.o		\
+	Utils.o					\
+	main.o 
 
 CFLAGS=--std=c++11 \
 	   -Wall \
