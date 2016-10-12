@@ -65,8 +65,8 @@ void initCamera(cv::Mat& f) {
 void tt(void);
 void tt(void)
 {
-	std::string a(".camera.conf");
-	std::string b(".cameraa.conf");
+	const char* a(".camera.conf");
+	const char* b(".cameraa.conf");
 	Camera cam(a);
 	Camera cam2(b);
 	cv::Point2f PP1, PP2;
