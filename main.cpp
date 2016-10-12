@@ -12,7 +12,7 @@
 #include "Utils.hpp"
 
 unsigned long debug = 1;
-CycloConfig *config = nullptr;
+static CycloConfig *config = nullptr;
 
 inline void MouseCallback(int event, int x, int y,
 		int __attribute__((__unused__)) flags,
