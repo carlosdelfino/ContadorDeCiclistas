@@ -6,12 +6,28 @@
     },
     "counter":
     {
-        "left": "0",
-        "right": "0",
-        "left_x": "58",
-        "left_y": "350",
-        "right_x": "538",
-        "right_y": "326"
+        "track":
+        {
+            "1":
+            {
+                "counter": "0",
+                "x": "30",
+                "y": "80"
+            },
+            "2":
+            {
+                "counter": "0",
+                "x": "30",
+                "y": "150"
+            },
+            "total": "0"
+        },
+        "file":
+        {
+            "basepath": ".\/images\/",
+            "prefix": "bike-",
+            "extension": "jpg"
+        }
     },
     "crop":
     {
@@ -20,34 +36,42 @@
             "dist_x": "10",
             "dist_y": "60"
         },
-        "left_x": "99",
-        "left_y": "68",
-        "right_x": "415",
-        "right_y": "243"
+        "left_x": "3",
+        "left_y": "4",
+        "right_x": "592",
+        "right_y": "473"
     },
     "interest":
     {
-        "start_x": "95",
-        "start_y": "36",
-        "end_x": "192",
-        "end_y": "138"
+        "start_x": "123",
+        "start_y": "9",
+        "end_x": "472",
+        "end_y": "465"
     },
     "perspective":
     {
         "superior":
         {
-            "left_x": "20",
-            "left_y": "21",
-            "right_x": "620",
-            "right_y": "22"
+            "left_x": "0",
+            "left_y": "0",
+            "right_x": "640",
+            "right_y": "0"
         },
         "inferior":
         {
-            "left_x": "21",
-            "left_y": "451",
-            "right_x": "622",
-            "right_y": "461"
+            "left_x": "0",
+            "left_y": "480",
+            "right_x": "640",
+            "right_y": "480"
         }
     },
-    "address": "Av. Carapinina, 1000"
+    "images":
+    {
+        "logos":
+        {
+            "principal": "images\/logo.jpg",
+            "second": "images\/cyclist.jpg"
+        }
+    },
+    "address": "teste"
 }
