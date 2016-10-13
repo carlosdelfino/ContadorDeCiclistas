@@ -98,7 +98,10 @@ CycloConfig::CycloConfig() {
 }
 
 CycloConfig::~CycloConfig() {
-	this->PersistData();
+	if (getSaveConfig()) {
+		this->PersistData();
+		std::cout << "** CycloConfig> Descartado." << std::endl;
+	}
 	std::cout << "** CycloConfig> Descartado." << std::endl;
 
 }
@@ -251,6 +254,8 @@ void CycloConfig::PersistData(std::string fileName) {
 	pt::write_json(fileName, tree);
 
 	std::cout << "** CycloConfig> Configurações Armazenada" << std::endl;
+
+	setSaveConfig(false);
 }
 
 void CycloConfig::LoadData() {
@@ -540,14 +545,27 @@ void CycloConfig::setReconfigure(bool b) {
 	reconfigureFlag = b;
 }
 
+void CycloConfig::setSaveConfig(bool b) {
+	saveConfigFlag = b;
+}
+bool CycloConfig::getSaveConfig() {
+	return saveConfigFlag;
+}
+
 unsigned long CycloConfig::countInteraction() {
 	// contabilizar tempo entre interações também.
 	return ++interaction;
 }
 
 void CycloConfig::parseCommandOptions(int argc, char * const *argv) {
-
-	while ((opt = getopt_long(argc, argv, "s:r:S:t:a:D:hO", long_options,
+	parseCommandOptions(argc, argv, this->long_options);
+}
+void CycloConfig::parseCommandOptions(	//.
+		int argc, 						//.
+		char * const *argv,				//.
+		option *options					//.
+		) {
+	while ((opt = getopt_long(argc, argv, "s:r:S:t:a:D:hO", options,
 			&long_index)) != -1) {
 		switch (opt) {
 		case 's':

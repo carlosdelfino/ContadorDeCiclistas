@@ -82,9 +82,9 @@ typedef struct {
 	unsigned int x_crop_windowPos = 10;
 	unsigned int y_crop_windowPos = 60;
 
-	unsigned int cropMaxWindowWidth = 350;//640 * CROP_MAX_WINDOW_PERCENT;
+	unsigned int cropMaxWindowWidth = 350;  //640 * CROP_MAX_WINDOW_PERCENT;
 
-	unsigned int cropMaxWindowWeight = 300;//480 * CROP_MAX_WINDOW_PERCENT;
+	unsigned int cropMaxWindowWeight = 300; //480 * CROP_MAX_WINDOW_PERCENT;
 
 	unsigned int x_crop[2] = { 0, 640 };
 	unsigned int y_crop[2] = { 0, 480 };
@@ -105,7 +105,10 @@ typedef struct {
 	unsigned int distanceThreshold = 30;
 	double contourThreshold = 50;
 
-	unsigned int captureFrameDelay = std::min(DEFAULT_CAPTURE_FRAME_DELAY,MAX_CAPTURE_FRAME_DELAY);
+	unsigned int captureFrameDelay = std::min(	//.
+			DEFAULT_CAPTURE_FRAME_DELAY,		//.
+			MAX_CAPTURE_FRAME_DELAY				//.
+		);
 
 } ConfigData;
 
@@ -146,6 +149,7 @@ private:
 	std::string configFileName = "CycloTracker.conf";
 	ConfigData data;
 	unsigned long interaction = 0;
+	bool saveConfigFlag = false;
 	bool reconfigureFlag = false;
 	CycloConfig();
 
@@ -162,11 +166,12 @@ public:
 
 	virtual ~CycloConfig();
 
-	void PersistData(std::string  fileName);
+	void PersistData(std::string fileName);
 	void PersistData();
 	void LoadData();
 
 	void parseCommandOptions(int argc, char * const *argv);
+	void parseCommandOptions(int argc, char * const *argv, option *options);
 
 	std::string getOutputDeviceName();
 	std::string getSensorDeviceName();
@@ -301,10 +306,13 @@ public:
 	void setReconfigure(bool b);
 	bool reconfigure();
 
+	void setSaveConfig(bool b);
+	bool getSaveConfig();
+
 	unsigned long countInteraction();
 
 	unsigned int getCaptureFrameDelay();
-	void setCaptureFrameDelay(unsigned int );
+	void setCaptureFrameDelay(unsigned int);
 };
 
 #endif /* CYCLOCONFIG_HPP_ */
