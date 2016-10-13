@@ -31,76 +31,6 @@ inline void MouseCallback(int event, int x, int y,
 	}
 
 }
-
-inline cv::VideoWriter* openVideoWriter() {
-
-	cv::VideoWriter* outputFile = nullptr;
-	if (config->hasRecordFileName()) {
-		std::cout << "** Gravando video em: " << config->getRecordFileName()
-				<< std::endl;
-		outputFile = new cv::VideoWriter(config->getRecordFileName(),
-				CV_FOURCC('M', 'P', 'E', 'G'), 30, config->getFullFrameSize());
-		if (!outputFile->isOpened()) {
-			std::cerr << "Erro ao abrir o arquivo para saída do video"
-					<< std::endl;
-			exit(EXIT_FAILURE);
-		}
-		std::cout
-				<< "**Dispositivo de saida preparado.                        **"
-				<< std::endl;
-	}
-	return outputFile;
-}
-
-inline VideoOutput* openVideoOutput() {
-
-	VideoOutput* outputDevice = nullptr;
-	if (config->hasOutputDeviceName()) {
-		std::cout << "**Abrindo dispositivo de saida de video "
-				<< config->getOutputDeviceName() << std::endl;
-		outputDevice = new VideoOutput(config->getOutputDeviceName().c_str());
-
-		if (!outputDevice->isOpened()) {
-			std::cerr << "Erro ao abrir o dispostivo para saída do video"
-					<< std::endl;
-			exit(EXIT_FAILURE);
-		}
-		std::cout
-				<< "**Dispositivo de saida preparado.                        **"
-				<< std::endl;
-	}
-	return outputDevice;
-}
-
-inline cv::VideoCapture* openvideoCapture() {
-	cv::VideoCapture* cap = nullptr;
-	if (config->getSourceType() == REG_FILE) {
-		std::cout
-				<< "**Abrindo arquivo fonte de video.                        **"
-				<< std::endl;
-		cap = new cv::VideoCapture(config->getSourceFileName());
-
-	} else {
-		std::cout << "** Abrindo dispositivo fonte de video.                 **"
-				<< std::endl;
-
-		cap = new cv::VideoCapture(config->getSourceDeviceId());
-
-	}
-	if (!cap) {
-		std::cerr << "Error: could not create a VideoCapture object"
-				<< std::endl;
-		exit(EXIT_FAILURE);
-	} else if (!cap->isOpened()) {
-		std::cout << "Verifique o arquivo fonte do vídeo." << std::endl;
-		exit(EXIT_FAILURE);
-	}
-	std::cout << "** Fonte de video está pronto.                        **"
-			<< std::endl;
-
-	return cap;
-}
-
 int main(int argc, char **argv) {
 
 	std::cout << "*****************************************************"
@@ -130,7 +60,9 @@ int main(int argc, char **argv) {
 				<< std::endl;
 	}
 
-	cv::VideoCapture *cap = openvideoCapture();
+	CycloTracker tracker(config);
+
+	cv::VideoCapture *cap = tracker.openVideoCapture();
 
 	std::cout << "** Obtendo o primeiro frame, para dimensionamento de janela"
 			<< std::endl;
@@ -181,9 +113,6 @@ int main(int argc, char **argv) {
 					% config->getCropWidth() % config->getCropHeight()
 			<< std::endl;
 
-	VideoOutput *outputDevice = openVideoOutput();
-	cv::VideoWriter* outputFile = openVideoWriter();
-
 	if (config->reconfigure()) {
 		std::cout << std::endl
 				<< "** Zerando, perspectiva, área de corte e area de interesse "
@@ -206,8 +135,9 @@ int main(int argc, char **argv) {
 
 	std::cout << "** Inciando loop de processamento das imagens" << std::endl;
 
+	tracker.openVideoOutput();
+	tracker.openVideoWriter();
 
-	CycloTracker tracker(config, cap, outputFile, outputDevice, sd);
 	tracker.processFrames();
 
 	if (sensorsThread) {
