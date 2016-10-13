@@ -8,12 +8,12 @@
 *.gcno
 *.gcda
 *.gcov
+*.conf
 gmon.out
 bin/*
 tmp/*
 gdb_cmds
 .data
-.camera.conf
 .cproject
 .project
 .settings/
