@@ -93,7 +93,8 @@ void InteractionHandler::SetAction(InteractionAction action) {
 				<< std::endl;
 		CurrentCallbackFunction = &InteractionHandler::saveConfig;
 	case NONE:
-		std::cout << "## InteractionHandler: Pronto, Finzalizado a parametrização do sistema"
+		std::cout
+				<< "## InteractionHandler: Pronto, Finzalizado a parametrização do sistema"
 				<< std::endl << std::endl
 				<< "## Você pode continuar usando o software," << std::endl
 				<< "## ou se prefire tecle [ESC]" << std::endl
@@ -132,8 +133,10 @@ void InteractionHandler::saveConfig(	//.
 		int x __attribute__((unused)),	//.
 		int y __attribute__((unused))	//.
 		) {
+	config->setSaveConfig(true);
 	config->PersistData();
 	config->setReconfigure(false);
+
 	nextCallBack();
 }
 void InteractionHandler::start(			//.
