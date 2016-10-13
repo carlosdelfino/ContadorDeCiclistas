@@ -2,7 +2,8 @@
 	pgo \
 	pgo-firstpass pgo-secondpass \
 	pgo-nanopi-m3-firstpass pgo-nanopi-m3-secondpass \
-	nanopi-m3
+	nanopi-m3 \
+	teste
 
 DISTDIR=./bin/
 BIN=CycloTracker
@@ -19,9 +20,6 @@ OBJ=						\
 	PointTracker.o			\
 	TrackedObject.o			\
 	Sensors.o				\
-	Camera.o				\
-	CameraConfig.o			\
-	CoordTransform.o		\
 	Utils.o					\
 	main.o 
 
@@ -104,3 +102,32 @@ distclean: clean
 
 confclean: 
 	rm -rf CycloTracker.conf
+	
+
+TESTEOBJ=						\
+	CycloTracker.o			\
+	CycloConfig.o			\
+	VideoOutput.o			\
+	ImageProcessor.o		\
+	ObjectCounter.o			\
+	ObjectLocator.o			\
+	ObjectTracker.o			\
+	PointTracker.o			\
+	TrackedObject.o			\
+	Sensors.o				\
+	Camera.o				\
+	CameraConfig.o			\
+	CoordTransform.o		\
+	Utils.o					\
+	Teste.o 
+
+TESTEBIN=Teste
+
+teste:  $(TESTEOBJ)
+	@mkdir -p $(DISTDIR)
+	@mkdir -p tmp
+	g++ $(TESTEOBJ) -o $(DISTDIR)/$(TESTEBIN) $(LDFLAGS)
+
+testeclean:
+	rm -f $(DISTDIR)/$(TESTEBIN)
+	rm -f $(TESTEOBJ)
