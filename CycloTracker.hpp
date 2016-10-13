@@ -45,8 +45,8 @@ private:
 	void ProvideOsd(cv::Mat &frame, SensorData *sd, ObjectTracker &ot);
 	void ProvidePip(cv::Mat &frame, cv::Mat &dst);
 
-	TrackerCallback posCallBack;
-	TrackerCallback preCallBack;
+	TrackerCallback posCallBack = nullptr;
+	TrackerCallback preCallBack = nullptr;
 
 public:
 
