@@ -35,8 +35,7 @@
 <a id="contador-de-ciclista" class="anchor" href="#contador-de-ciclista" aria-hidden="true">
 <span aria-hidden="true" class="octicon octicon-link"></span></a>Passo a Passo diário para port do projeto para ARM Cortex-53</h2>
 
-<p>Conforme pode ser visto no repositório, clique no botão acima para ver no 
-github, criei um branch de nome <b>NanoPI-M3</b> onde os teses atuais estão 
+<p>Conforme pode ser visto no repositório, clique no botão acima para, criei um branch de nome <b>NanoPI-M3</b> onde os teses atuais estão 
 sendo feitos.</p>
 <p>No estágio atual o branch já pode ser unificado com o master, pois existem
 targets especificas para cada compilação, podendo assim gerar código para cada
@@ -48,15 +47,38 @@ no linux em uma plataforma intel use:</p>
 make CROSS_COMPILE=arm-linux- CONFIG_CROSS_COMPILE=arm-linux- targetcompilacao
 </pre> 
 
-<p> Hoje dia 03 de outubro de 2016, resolvi as pendências para que o profile do código
-funcionasse, a documentação sobre o assunto está disponível na página <a href="profiling.html">
-"Profiling"</a></p>
+<h3>16 de Outubro de 2016</h3>
+
+<p>A situação atual do projeto é boa, estou a caminho de terminar as compilações do TBB especialmente pra o Cortex-A53 (ARMv8-A) com pequenos ajustes nada muito profundo, mas realmente compilado nativamente e com as diretivas para optimizar a compilação para este perfil de arquitetura.</p>
+
+<p>Também já compilei o OpenCV para esta arquitetura e testei tudo ok.</p>
+
+<h4>Profilling</h4>
+<p>Tenho feito alguns testes de desempenho usando o GCOV e GPROF e agora vou testar com o GPERF, já testei também com o velho calculo de milissegundos no próprio código, e o gargalo está em dois pontos principais, no ajuste de perspectiva que leva o tripo do tempo aceitável, está em 60ms o que permite apenas 10 a 15 frames por segundo, e para piorar a função AcquireForegraund da classe ImageProcessor está levando 100ms, o que degrada o processamento para quase um frame por segundo, ela está durando mais 100ms portanto este é foco na optimização, acho que podemos descartar esta função e usarmos uma janela a parte para tal imagem, ou outro método, já que o usado através do algoritmo <pre>cv::BackgroundSubtractorMOG2()</pre> torna tudo inviável. quando se usa janelas com tal recurso<p> 
+
+<p>Para resolver isso criei algumas chaves de comando que retiram tais recursos da aplicação permitindo que ela seja executada com foco apensas na detecção e gravação de imagens quando necessário, isso melhora o algoritmo em 100% ou mais.</p>
+
+<p>Enquanto não consigo mais imagens para testar o algoritmo, estou trabalhando apenas com o que é realmente calculável no código sem coloca-lo a prova num campo real, mas tenho visto resultados, ainda esta semana vou liberar os pacotes OpenCV e TBB compilados especificamene para uso com Cortex-A53.</p>
+
+<h3>16 de Outubro de 2016</h3>
+<p>Estou compilando um novo pacote do OpenCV específico para uso com o NanoPI M3 e seu processador, podendo em breve usar o mesmo caminho para outros Processadores da linha NanoPI-M3.
+</p>
+<p> Assim que estiver pronto posto o link nesta página. E um tutorial em meu site.
+</p>
+
 
 <h3>Atualizações em 13 de Outubro de 2016</h3>
 <p>Postei atualizações sobre o projeto na publicação: <a href="http://carlosdelfino.eti.br/embarcados/Contando_Bicicletas_NanoPI/">http://carlosdelfino.eti.br/embarcados/Contando_Bicicletas_NanoPI/</a>
 </p>
 
+<h3>03 de Outubro de 2016</h3>
+<p> Hoje dia 03 de outubro de 2016, resolvi as pendências para que o profile do código
+funcionasse, a documentação sobre o assunto está disponível na página <a href="profiling.html">
+"Profiling"</a></p>
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ifBOIyaRGy8" frameborder="0" allowfullscreen></iframe>
+
+
         </section>
 
         <footer>
