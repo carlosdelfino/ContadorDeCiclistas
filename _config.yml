@@ -1,0 +1,8 @@
+title: Contador de Ciclistas - Fork ARM (NanoPI e RaspberryPI)
+description: Contador de Ciclistas e Objetos Moveis na Pista
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-leap-day
+
+gems:
+  - jekyll-mentions
