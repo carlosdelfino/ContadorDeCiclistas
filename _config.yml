@@ -6,4 +6,4 @@ theme: jekyll-theme-leap-day
 
 gems:
   - jekyll-mentions
-  - jekyll-sitemaps
+  - jekyll-sitemap
